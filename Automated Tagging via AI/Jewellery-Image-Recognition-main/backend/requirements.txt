@@ -1,0 +1,9 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+motor==3.3.2
+pymongo==4.6.0
+python-multipart==0.0.6
+python-dotenv==1.0.0
+pydantic==1.10.13
+groq>=0.26.0
+pillow>=10.0.0,<11.0.0
