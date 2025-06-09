@@ -162,7 +162,11 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
             response_format={"type": "json_object"},
         )
 
+        logger.info(response)
+
         analysis_data = json.loads(response.choices[0].message.content)
+        logger.info(analysis_data)
+
         logger.info(f"Groq response: {analysis_data}")
 
         return {
@@ -180,12 +184,12 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
         logger.error(f"Error analyzing image with Groq: {str(e)}")
         # Fallback response in case Groq API fails
         fallback_analysis = {
-            "materials": ["unknown"],
-            "colors": ["unknown"],
+            "materials": [],
+            "colors": [],
             "patterns": [],
             "motifs": [],
             "styles": [],
-            "functional": ["jewelry"],
+            "functional": [],
             "overall_description": "Analysis failed due to API error",
         }
         return {
