@@ -1,0 +1,377 @@
+2025-06-09 14:37:50,546 - server - ERROR - Error initializing Groq client: Client.__init__() got an unexpected keyword argument 'proxies'
+2025-06-09 14:37:50,589 - fastapi - ERROR - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+2025-06-09 14:38:22,003 - server - ERROR - Error initializing Groq client: Client.__init__() got an unexpected keyword argument 'proxies'
+2025-06-09 14:38:22,737 - server - INFO - Database indexes created
+2025-06-09 14:39:23,615 - server - INFO - Received upload request
+2025-06-09 14:39:23,615 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 14:39:23,628 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 14:39:24,013 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:39:24,016 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:39:24,019 - server - ERROR - Error processing images: 
+2025-06-09 14:39:29,734 - server - INFO - Received upload request
+2025-06-09 14:39:29,735 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 14:39:29,739 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 14:39:30,091 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:39:30,094 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:39:30,095 - server - ERROR - Error processing images: 
+2025-06-09 14:42:57,004 - server - INFO - Database connection closed
+2025-06-09 14:55:10,465 - server - INFO - MongoDB connection established
+2025-06-09 14:55:10,465 - server - ERROR - Error initializing or validating Groq client: Client.__init__() got an unexpected keyword argument 'proxies'
+2025-06-09 14:55:12,629 - server - INFO - Database indexes created
+2025-06-09 14:57:19,102 - server - INFO - Received upload request
+2025-06-09 14:57:19,102 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 14:57:19,112 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 14:57:19,112 - server - INFO - Making Groq API call
+2025-06-09 14:57:19,490 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:57:19,490 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:57:19,543 - server - INFO - Stored analysis for ad (57).jpg in database
+2025-06-09 14:57:19,566 - server - INFO - Stored taxonomy for session c25b87f7-1e46-46f2-8097-a3f638e051e4
+2025-06-09 14:57:30,053 - server - INFO - Received upload request
+2025-06-09 14:57:30,054 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 14:57:30,058 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 14:57:30,058 - server - INFO - Making Groq API call
+2025-06-09 14:57:30,396 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:57:30,396 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:57:30,423 - server - INFO - Stored analysis for ad (57).jpg in database
+2025-06-09 14:57:30,449 - server - INFO - Stored taxonomy for session 98c446ce-78f2-474a-965d-b2255abbe30c
+2025-06-09 14:57:41,189 - server - INFO - Received upload request
+2025-06-09 14:57:41,190 - server - INFO - Processing file: w (385).jpg
+2025-06-09 14:57:41,193 - server - INFO - Analyzing image: w (385).jpg
+2025-06-09 14:57:41,194 - server - INFO - Making Groq API call
+2025-06-09 14:57:41,584 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:57:41,584 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:57:41,607 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-09 14:57:41,641 - server - INFO - Stored taxonomy for session 445ebe69-db68-42fc-98d0-a9a78c073c56
+2025-06-09 14:57:55,214 - server - INFO - Received upload request
+2025-06-09 14:57:55,214 - server - INFO - Processing file: w (385).jpg
+2025-06-09 14:57:55,218 - server - INFO - Analyzing image: w (385).jpg
+2025-06-09 14:57:55,218 - server - INFO - Making Groq API call
+2025-06-09 14:57:55,617 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:57:55,617 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:57:55,641 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-09 14:57:55,669 - server - INFO - Stored taxonomy for session 6bc4d16b-50da-467c-9e98-7d3dce670891
+2025-06-09 14:58:41,330 - server - INFO - Received upload request
+2025-06-09 14:58:41,330 - server - INFO - Processing file: r (375).jpg
+2025-06-09 14:58:41,330 - server - INFO - Analyzing image: r (375).jpg
+2025-06-09 14:58:41,343 - server - INFO - Making Groq API call
+2025-06-09 14:58:41,681 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:41,697 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:41,721 - server - INFO - Stored analysis for r (375).jpg in database
+2025-06-09 14:58:41,721 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 14:58:41,733 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 14:58:41,733 - server - INFO - Making Groq API call
+2025-06-09 14:58:41,996 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:41,996 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:42,019 - server - INFO - Stored analysis for ad (57).jpg in database
+2025-06-09 14:58:42,019 - server - INFO - Processing file: ad (56).jpg
+2025-06-09 14:58:42,029 - server - INFO - Analyzing image: ad (56).jpg
+2025-06-09 14:58:42,030 - server - INFO - Making Groq API call
+2025-06-09 14:58:42,298 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:42,298 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:42,322 - server - INFO - Stored analysis for ad (56).jpg in database
+2025-06-09 14:58:42,322 - server - INFO - Processing file: t (358).jpg
+2025-06-09 14:58:42,328 - server - INFO - Analyzing image: t (358).jpg
+2025-06-09 14:58:42,329 - server - INFO - Making Groq API call
+2025-06-09 14:58:42,599 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:42,599 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:42,631 - server - INFO - Stored analysis for t (358).jpg in database
+2025-06-09 14:58:42,632 - server - INFO - Processing file: q (30).jpg
+2025-06-09 14:58:42,636 - server - INFO - Analyzing image: q (30).jpg
+2025-06-09 14:58:42,636 - server - INFO - Making Groq API call
+2025-06-09 14:58:43,569 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:43,569 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:43,604 - server - INFO - Stored analysis for q (30).jpg in database
+2025-06-09 14:58:43,605 - server - INFO - Processing file: w (385).jpg
+2025-06-09 14:58:43,618 - server - INFO - Analyzing image: w (385).jpg
+2025-06-09 14:58:43,619 - server - INFO - Making Groq API call
+2025-06-09 14:58:43,886 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:43,886 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:43,911 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-09 14:58:43,923 - server - INFO - Processing file: z (328).jpg
+2025-06-09 14:58:43,931 - server - INFO - Analyzing image: z (328).jpg
+2025-06-09 14:58:43,937 - server - INFO - Making Groq API call
+2025-06-09 14:58:44,856 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:44,856 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:44,888 - server - INFO - Stored analysis for z (328).jpg in database
+2025-06-09 14:58:44,891 - server - INFO - Processing file: ao (78).jpg
+2025-06-09 14:58:44,903 - server - INFO - Analyzing image: ao (78).jpg
+2025-06-09 14:58:44,903 - server - INFO - Making Groq API call
+2025-06-09 14:58:45,225 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:45,225 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:45,337 - server - INFO - Stored analysis for ao (78).jpg in database
+2025-06-09 14:58:45,338 - server - INFO - Processing file: ao (84).jpg
+2025-06-09 14:58:45,341 - server - INFO - Analyzing image: ao (84).jpg
+2025-06-09 14:58:45,341 - server - INFO - Making Groq API call
+2025-06-09 14:58:45,609 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:45,609 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:45,647 - server - INFO - Stored analysis for ao (84).jpg in database
+2025-06-09 14:58:45,648 - server - INFO - Processing file: aw (39).jpg
+2025-06-09 14:58:45,651 - server - INFO - Analyzing image: aw (39).jpg
+2025-06-09 14:58:45,651 - server - INFO - Making Groq API call
+2025-06-09 14:58:45,910 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:45,910 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:45,937 - server - INFO - Stored analysis for aw (39).jpg in database
+2025-06-09 14:58:45,938 - server - INFO - Processing file: ag (138).jpg
+2025-06-09 14:58:45,952 - server - INFO - Analyzing image: ag (138).jpg
+2025-06-09 14:58:45,953 - server - INFO - Making Groq API call
+2025-06-09 14:58:46,213 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:46,213 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:46,240 - server - INFO - Stored analysis for ag (138).jpg in database
+2025-06-09 14:58:46,241 - server - INFO - Processing file: ar (161).jpg
+2025-06-09 14:58:46,254 - server - INFO - Analyzing image: ar (161).jpg
+2025-06-09 14:58:46,255 - server - INFO - Making Groq API call
+2025-06-09 14:58:46,528 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:46,531 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:46,553 - server - INFO - Stored analysis for ar (161).jpg in database
+2025-06-09 14:58:46,553 - server - INFO - Processing file: b (1).jpg
+2025-06-09 14:58:46,568 - server - INFO - Analyzing image: b (1).jpg
+2025-06-09 14:58:46,570 - server - INFO - Making Groq API call
+2025-06-09 14:58:46,831 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:46,832 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:46,855 - server - INFO - Stored analysis for b (1).jpg in database
+2025-06-09 14:58:46,855 - server - INFO - Processing file: t (154).jpg
+2025-06-09 14:58:46,863 - server - INFO - Analyzing image: t (154).jpg
+2025-06-09 14:58:46,865 - server - INFO - Making Groq API call
+2025-06-09 14:58:47,117 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:47,132 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:47,156 - server - INFO - Stored analysis for t (154).jpg in database
+2025-06-09 14:58:47,157 - server - INFO - Processing file: w (287).jpg
+2025-06-09 14:58:47,170 - server - INFO - Analyzing image: w (287).jpg
+2025-06-09 14:58:47,173 - server - INFO - Making Groq API call
+2025-06-09 14:58:47,438 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:47,438 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:47,465 - server - INFO - Stored analysis for w (287).jpg in database
+2025-06-09 14:58:47,465 - server - INFO - Processing file: aw (2).jpg
+2025-06-09 14:58:47,470 - server - INFO - Analyzing image: aw (2).jpg
+2025-06-09 14:58:47,470 - server - INFO - Making Groq API call
+2025-06-09 14:58:47,734 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:47,736 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:47,762 - server - INFO - Stored analysis for aw (2).jpg in database
+2025-06-09 14:58:47,763 - server - INFO - Processing file: t (445).jpg
+2025-06-09 14:58:47,774 - server - INFO - Analyzing image: t (445).jpg
+2025-06-09 14:58:47,774 - server - INFO - Making Groq API call
+2025-06-09 14:58:48,035 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:48,037 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:48,075 - server - INFO - Stored analysis for t (445).jpg in database
+2025-06-09 14:58:48,075 - server - INFO - Processing file: b (94).jpg
+2025-06-09 14:58:48,088 - server - INFO - Analyzing image: b (94).jpg
+2025-06-09 14:58:48,089 - server - INFO - Making Groq API call
+2025-06-09 14:58:48,370 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:48,372 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:48,393 - server - INFO - Stored analysis for b (94).jpg in database
+2025-06-09 14:58:48,393 - server - INFO - Processing file: i (27).jpg
+2025-06-09 14:58:48,409 - server - INFO - Analyzing image: i (27).jpg
+2025-06-09 14:58:48,409 - server - INFO - Making Groq API call
+2025-06-09 14:58:48,673 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:48,675 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:48,694 - server - INFO - Stored analysis for i (27).jpg in database
+2025-06-09 14:58:48,694 - server - INFO - Processing file: x (152).jpg
+2025-06-09 14:58:48,711 - server - INFO - Analyzing image: x (152).jpg
+2025-06-09 14:58:48,711 - server - INFO - Making Groq API call
+2025-06-09 14:58:48,989 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:48,989 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:49,014 - server - INFO - Stored analysis for x (152).jpg in database
+2025-06-09 14:58:49,015 - server - INFO - Processing file: l (102).jpg
+2025-06-09 14:58:49,026 - server - INFO - Analyzing image: l (102).jpg
+2025-06-09 14:58:49,028 - server - INFO - Making Groq API call
+2025-06-09 14:58:49,289 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:49,289 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:49,322 - server - INFO - Stored analysis for l (102).jpg in database
+2025-06-09 14:58:49,323 - server - INFO - Processing file: w (158).jpg
+2025-06-09 14:58:49,324 - server - INFO - Analyzing image: w (158).jpg
+2025-06-09 14:58:49,324 - server - INFO - Making Groq API call
+2025-06-09 14:58:49,591 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:49,591 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:49,629 - server - INFO - Stored analysis for w (158).jpg in database
+2025-06-09 14:58:49,630 - server - INFO - Processing file: ab (26).jpg
+2025-06-09 14:58:49,641 - server - INFO - Analyzing image: ab (26).jpg
+2025-06-09 14:58:49,642 - server - INFO - Making Groq API call
+2025-06-09 14:58:49,891 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:49,907 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:49,931 - server - INFO - Stored analysis for ab (26).jpg in database
+2025-06-09 14:58:49,931 - server - INFO - Processing file: x (114).jpg
+2025-06-09 14:58:49,937 - server - INFO - Analyzing image: x (114).jpg
+2025-06-09 14:58:49,938 - server - INFO - Making Groq API call
+2025-06-09 14:58:50,192 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:50,192 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:50,216 - server - INFO - Stored analysis for x (114).jpg in database
+2025-06-09 14:58:50,216 - server - INFO - Processing file: x (326).jpg
+2025-06-09 14:58:50,228 - server - INFO - Analyzing image: x (326).jpg
+2025-06-09 14:58:50,228 - server - INFO - Making Groq API call
+2025-06-09 14:58:50,493 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:50,493 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:50,531 - server - INFO - Stored analysis for x (326).jpg in database
+2025-06-09 14:58:50,532 - server - INFO - Processing file: a (1).jpg
+2025-06-09 14:58:50,534 - server - INFO - Analyzing image: a (1).jpg
+2025-06-09 14:58:50,534 - server - INFO - Making Groq API call
+2025-06-09 14:58:50,794 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 14:58:50,794 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 14:58:50,837 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-09 14:58:50,862 - server - INFO - Stored taxonomy for session 3372e229-db51-493e-95ee-8515fad714c0
+2025-06-09 16:57:53,555 - server - INFO - Received upload request
+2025-06-09 16:57:53,556 - server - INFO - Processing file: r (375).jpg
+2025-06-09 16:57:53,560 - server - INFO - Analyzing image: r (375).jpg
+2025-06-09 16:57:53,560 - server - INFO - Making Groq API call
+2025-06-09 16:57:53,889 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:53,892 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:53,925 - server - INFO - Stored analysis for r (375).jpg in database
+2025-06-09 16:57:53,927 - server - INFO - Processing file: ad (57).jpg
+2025-06-09 16:57:53,939 - server - INFO - Analyzing image: ad (57).jpg
+2025-06-09 16:57:53,939 - server - INFO - Making Groq API call
+2025-06-09 16:57:54,192 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:54,194 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:54,217 - server - INFO - Stored analysis for ad (57).jpg in database
+2025-06-09 16:57:54,222 - server - INFO - Processing file: ad (56).jpg
+2025-06-09 16:57:54,232 - server - INFO - Analyzing image: ad (56).jpg
+2025-06-09 16:57:54,233 - server - INFO - Making Groq API call
+2025-06-09 16:57:54,486 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:54,490 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:54,512 - server - INFO - Stored analysis for ad (56).jpg in database
+2025-06-09 16:57:54,513 - server - INFO - Processing file: t (358).jpg
+2025-06-09 16:57:54,524 - server - INFO - Analyzing image: t (358).jpg
+2025-06-09 16:57:54,525 - server - INFO - Making Groq API call
+2025-06-09 16:57:54,780 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:54,783 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:54,807 - server - INFO - Stored analysis for t (358).jpg in database
+2025-06-09 16:57:54,808 - server - INFO - Processing file: q (30).jpg
+2025-06-09 16:57:54,819 - server - INFO - Analyzing image: q (30).jpg
+2025-06-09 16:57:54,819 - server - INFO - Making Groq API call
+2025-06-09 16:57:55,100 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:55,102 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:55,126 - server - INFO - Stored analysis for q (30).jpg in database
+2025-06-09 16:57:55,126 - server - INFO - Processing file: w (385).jpg
+2025-06-09 16:57:55,131 - server - INFO - Analyzing image: w (385).jpg
+2025-06-09 16:57:55,131 - server - INFO - Making Groq API call
+2025-06-09 16:57:55,385 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:55,386 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:55,408 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-09 16:57:55,409 - server - INFO - Processing file: z (328).jpg
+2025-06-09 16:57:55,419 - server - INFO - Analyzing image: z (328).jpg
+2025-06-09 16:57:55,419 - server - INFO - Making Groq API call
+2025-06-09 16:57:55,673 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:55,678 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:55,701 - server - INFO - Stored analysis for z (328).jpg in database
+2025-06-09 16:57:55,702 - server - INFO - Processing file: ao (78).jpg
+2025-06-09 16:57:55,708 - server - INFO - Analyzing image: ao (78).jpg
+2025-06-09 16:57:55,709 - server - INFO - Making Groq API call
+2025-06-09 16:57:55,962 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:55,964 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:55,987 - server - INFO - Stored analysis for ao (78).jpg in database
+2025-06-09 16:57:55,994 - server - INFO - Processing file: ao (84).jpg
+2025-06-09 16:57:56,002 - server - INFO - Analyzing image: ao (84).jpg
+2025-06-09 16:57:56,002 - server - INFO - Making Groq API call
+2025-06-09 16:57:56,262 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:56,264 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:56,285 - server - INFO - Stored analysis for ao (84).jpg in database
+2025-06-09 16:57:56,285 - server - INFO - Processing file: aw (39).jpg
+2025-06-09 16:57:56,288 - server - INFO - Analyzing image: aw (39).jpg
+2025-06-09 16:57:56,289 - server - INFO - Making Groq API call
+2025-06-09 16:57:56,543 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:56,546 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:56,569 - server - INFO - Stored analysis for aw (39).jpg in database
+2025-06-09 16:57:56,570 - server - INFO - Processing file: ag (138).jpg
+2025-06-09 16:57:56,576 - server - INFO - Analyzing image: ag (138).jpg
+2025-06-09 16:57:56,577 - server - INFO - Making Groq API call
+2025-06-09 16:57:57,493 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:57,495 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:57,520 - server - INFO - Stored analysis for ag (138).jpg in database
+2025-06-09 16:57:57,521 - server - INFO - Processing file: ar (161).jpg
+2025-06-09 16:57:57,533 - server - INFO - Analyzing image: ar (161).jpg
+2025-06-09 16:57:57,533 - server - INFO - Making Groq API call
+2025-06-09 16:57:57,785 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:57,787 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:57,812 - server - INFO - Stored analysis for ar (161).jpg in database
+2025-06-09 16:57:57,813 - server - INFO - Processing file: b (1).jpg
+2025-06-09 16:57:57,819 - server - INFO - Analyzing image: b (1).jpg
+2025-06-09 16:57:57,819 - server - INFO - Making Groq API call
+2025-06-09 16:57:58,074 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:58,076 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:58,097 - server - INFO - Stored analysis for b (1).jpg in database
+2025-06-09 16:57:58,100 - server - INFO - Processing file: t (154).jpg
+2025-06-09 16:57:58,108 - server - INFO - Analyzing image: t (154).jpg
+2025-06-09 16:57:58,109 - server - INFO - Making Groq API call
+2025-06-09 16:57:58,359 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:58,360 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:58,382 - server - INFO - Stored analysis for t (154).jpg in database
+2025-06-09 16:57:58,382 - server - INFO - Processing file: w (287).jpg
+2025-06-09 16:57:58,389 - server - INFO - Analyzing image: w (287).jpg
+2025-06-09 16:57:58,390 - server - INFO - Making Groq API call
+2025-06-09 16:57:58,642 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:58,644 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:58,668 - server - INFO - Stored analysis for w (287).jpg in database
+2025-06-09 16:57:58,673 - server - INFO - Processing file: aw (2).jpg
+2025-06-09 16:57:58,680 - server - INFO - Analyzing image: aw (2).jpg
+2025-06-09 16:57:58,680 - server - INFO - Making Groq API call
+2025-06-09 16:57:58,938 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:58,940 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:58,963 - server - INFO - Stored analysis for aw (2).jpg in database
+2025-06-09 16:57:58,966 - server - INFO - Processing file: t (445).jpg
+2025-06-09 16:57:58,978 - server - INFO - Analyzing image: t (445).jpg
+2025-06-09 16:57:58,979 - server - INFO - Making Groq API call
+2025-06-09 16:57:59,237 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:59,240 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:59,264 - server - INFO - Stored analysis for t (445).jpg in database
+2025-06-09 16:57:59,265 - server - INFO - Processing file: b (94).jpg
+2025-06-09 16:57:59,278 - server - INFO - Analyzing image: b (94).jpg
+2025-06-09 16:57:59,279 - server - INFO - Making Groq API call
+2025-06-09 16:57:59,536 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:59,539 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:59,563 - server - INFO - Stored analysis for b (94).jpg in database
+2025-06-09 16:57:59,565 - server - INFO - Processing file: i (27).jpg
+2025-06-09 16:57:59,578 - server - INFO - Analyzing image: i (27).jpg
+2025-06-09 16:57:59,579 - server - INFO - Making Groq API call
+2025-06-09 16:57:59,842 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:57:59,844 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:57:59,866 - server - INFO - Stored analysis for i (27).jpg in database
+2025-06-09 16:57:59,868 - server - INFO - Processing file: x (152).jpg
+2025-06-09 16:57:59,872 - server - INFO - Analyzing image: x (152).jpg
+2025-06-09 16:57:59,872 - server - INFO - Making Groq API call
+2025-06-09 16:58:00,126 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:00,130 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:00,158 - server - INFO - Stored analysis for x (152).jpg in database
+2025-06-09 16:58:00,162 - server - INFO - Processing file: l (102).jpg
+2025-06-09 16:58:00,168 - server - INFO - Analyzing image: l (102).jpg
+2025-06-09 16:58:00,168 - server - INFO - Making Groq API call
+2025-06-09 16:58:00,431 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:00,431 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:00,452 - server - INFO - Stored analysis for l (102).jpg in database
+2025-06-09 16:58:00,452 - server - INFO - Processing file: w (158).jpg
+2025-06-09 16:58:00,455 - server - INFO - Analyzing image: w (158).jpg
+2025-06-09 16:58:00,455 - server - INFO - Making Groq API call
+2025-06-09 16:58:00,710 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:00,712 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:00,733 - server - INFO - Stored analysis for w (158).jpg in database
+2025-06-09 16:58:00,733 - server - INFO - Processing file: ab (26).jpg
+2025-06-09 16:58:00,735 - server - INFO - Analyzing image: ab (26).jpg
+2025-06-09 16:58:00,736 - server - INFO - Making Groq API call
+2025-06-09 16:58:00,995 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:00,998 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:01,020 - server - INFO - Stored analysis for ab (26).jpg in database
+2025-06-09 16:58:01,021 - server - INFO - Processing file: x (114).jpg
+2025-06-09 16:58:01,028 - server - INFO - Analyzing image: x (114).jpg
+2025-06-09 16:58:01,029 - server - INFO - Making Groq API call
+2025-06-09 16:58:01,285 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:01,287 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:01,316 - server - INFO - Stored analysis for x (114).jpg in database
+2025-06-09 16:58:01,319 - server - INFO - Processing file: x (326).jpg
+2025-06-09 16:58:01,323 - server - INFO - Analyzing image: x (326).jpg
+2025-06-09 16:58:01,326 - server - INFO - Making Groq API call
+2025-06-09 16:58:01,596 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:01,597 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:01,618 - server - INFO - Stored analysis for x (326).jpg in database
+2025-06-09 16:58:01,618 - server - INFO - Processing file: a (1).jpg
+2025-06-09 16:58:01,621 - server - INFO - Analyzing image: a (1).jpg
+2025-06-09 16:58:01,622 - server - INFO - Making Groq API call
+2025-06-09 16:58:01,883 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-09 16:58:01,885 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-09 16:58:01,905 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-09 16:58:01,929 - server - INFO - Stored taxonomy for session 7a4f77c3-ad7e-4e25-96c8-913dad1c304d
+2025-06-09 16:58:46,544 - server - INFO - Database connection closed
+2025-06-09 16:59:39,416 - server - INFO - MongoDB connection established
+2025-06-09 16:59:39,417 - server - ERROR - Error initializing or validating Groq client: Client.__init__() got an unexpected keyword argument 'proxies'
+2025-06-09 16:59:39,873 - server - INFO - Database indexes created
+2025-06-09 17:21:45,842 - server - INFO - Database connection closed

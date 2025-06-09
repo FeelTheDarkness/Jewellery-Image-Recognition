@@ -38,15 +38,27 @@ app.add_middleware(
 # Database connection
 mongo_url = os.getenv("MONGO_URL")
 db_name = os.getenv("DB_NAME")
-client = AsyncIOMotorClient(mongo_url)
-db = client[db_name]
+try:
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[db_name]
+    logger.info("MongoDB connection established")
+except Exception as e:
+    logger.error(f"Failed to connect to MongoDB: {str(e)}")
+    raise Exception(f"Failed to connect to MongoDB: {str(e)}")
 
 # Groq client
 try:
     groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     logger.info("Groq client initialized successfully")
+    # Test Groq API key
+    test_response = groq_client.chat.completions.create(
+        model="mixtral-8x7b-32768",
+        messages=[{"role": "user", "content": "Test"}],
+        max_tokens=10,
+    )
+    logger.info("Groq API key validated successfully")
 except Exception as e:
-    logger.error(f"Error initializing Groq client: {str(e)}")
+    logger.error(f"Error initializing or validating Groq client: {str(e)}")
     import httpx
     from groq._client import Groq as GroqClient
 
@@ -64,9 +76,13 @@ taxonomies_collection = db.taxonomies
 @app.on_event("startup")
 async def startup_db_client():
     """Initialize database indexes"""
-    await images_collection.create_index("session_id")
-    await taxonomies_collection.create_index("session_id")
-    logger.info("Database indexes created")
+    try:
+        await images_collection.create_index("session_id")
+        await taxonomies_collection.create_index("session_id")
+        logger.info("Database indexes created")
+    except Exception as e:
+        logger.error(f"Error creating database indexes: {str(e)}")
+        raise Exception(f"Error creating database indexes: {str(e)}")
 
 
 @app.on_event("shutdown")
@@ -137,6 +153,7 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
         """
 
         # Call Groq API with text-only model
+        logger.info("Making Groq API call")
         response = groq_client.chat.completions.create(
             model="mixtral-8x7b-32768",
             messages=[{"role": "user", "content": analysis_prompt}],
@@ -154,11 +171,28 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
             "raw_response": response.choices[0].message.content,
         }
 
+    except json.JSONDecodeError as e:
+        logger.error(f"Error decoding Groq API response: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error decoding Groq API response: {str(e)}"
+        )
     except Exception as e:
         logger.error(f"Error analyzing image with Groq: {str(e)}")
-        raise HTTPException(
-            status_code=500, detail=f"Error analyzing image with Groq: {str(e)}"
-        )
+        # Fallback response in case Groq API fails
+        fallback_analysis = {
+            "materials": ["unknown"],
+            "colors": ["unknown"],
+            "patterns": [],
+            "motifs": [],
+            "styles": [],
+            "functional": ["jewelry"],
+            "overall_description": "Analysis failed due to API error",
+        }
+        return {
+            "filename": filename,
+            "analysis": fallback_analysis,
+            "raw_response": f"Error: {str(e)}",
+        }
 
 
 async def generate_smart_hashtags(analyses: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -220,6 +254,10 @@ async def upload_images(files: List[UploadFile] = File(...)):
     """Upload and analyze multiple images"""
     logger.info("Received upload request")
     try:
+        if not files:
+            logger.warning("No files provided in the request")
+            raise HTTPException(status_code=400, detail="No files provided")
+
         session_id = str(uuid.uuid4())
         analyses = []
         for file in files:
@@ -228,21 +266,53 @@ async def upload_images(files: List[UploadFile] = File(...)):
                 logger.warning(f"Skipping non-image file: {file.filename}")
                 continue
 
-            image_data = await file.read()
-            image_base64 = optimize_image(image_data)
-            analysis = await analyze_image_with_groq(image_base64, file.filename)
-            analyses.append(analysis)
+            try:
+                image_data = await file.read()
+                if not image_data:
+                    logger.error(f"Empty file received: {file.filename}")
+                    raise HTTPException(
+                        status_code=400, detail=f"Empty file: {file.filename}"
+                    )
 
-            image_doc = {
-                "id": str(uuid.uuid4()),
-                "session_id": session_id,
-                "filename": file.filename,
-                "analysis": analysis,
-                "uploaded_at": datetime.utcnow(),
-                "image_base64": image_base64[:100] + "...",
-            }
-            await images_collection.insert_one(image_doc)
-            logger.info(f"Stored analysis for {file.filename} in database")
+                image_base64 = optimize_image(image_data)
+                analysis = await analyze_image_with_groq(image_base64, file.filename)
+                analyses.append(analysis)
+
+                image_doc = {
+                    "id": str(uuid.uuid4()),
+                    "session_id": session_id,
+                    "filename": file.filename,
+                    "analysis": analysis,
+                    "uploaded_at": datetime.utcnow(),
+                    "image_base64": image_base64[:100] + "...",
+                }
+                await images_collection.insert_one(image_doc)
+                logger.info(f"Stored analysis for {file.filename} in database")
+
+            except Exception as e:
+                logger.error(f"Error processing file {file.filename}: {str(e)}")
+                analyses.append(
+                    {
+                        "filename": file.filename,
+                        "analysis": {
+                            "materials": ["error"],
+                            "colors": ["error"],
+                            "patterns": [],
+                            "motifs": [],
+                            "styles": [],
+                            "functional": ["error"],
+                            "overall_description": f"Failed to process: {str(e)}",
+                        },
+                        "raw_response": f"Error: {str(e)}",
+                    }
+                )
+                continue
+
+        if not analyses:
+            logger.error("No images were successfully processed")
+            raise HTTPException(
+                status_code=400, detail="No images were successfully processed"
+            )
 
         taxonomy_data = await generate_smart_hashtags(analyses)
 
@@ -328,4 +398,4 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
