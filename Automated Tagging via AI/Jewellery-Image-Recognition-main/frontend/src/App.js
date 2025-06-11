@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import './App.css';
 
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 
 function App() {
   const [dragActive, setDragActive] = useState(false);
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const [taxonomy, setTaxonomy] = useState(null);
+  const [individualHashtags, setIndividualHashtags] = useState(null);
   const [sessionId, setSessionId] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [showSessions, setShowSessions] = useState(false);
@@ -17,9 +17,9 @@ function App() {
   const handleDrag = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   }, []);
@@ -28,9 +28,8 @@ function App() {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const fileList = Array.from(e.dataTransfer.files).filter(file => 
+      const fileList = Array.from(e.dataTransfer.files).filter((file) =>
         file.type.startsWith('image/')
       );
       setFiles(fileList);
@@ -39,7 +38,7 @@ function App() {
 
   const handleFileSelect = (e) => {
     if (e.target.files) {
-      const fileList = Array.from(e.target.files).filter(file => 
+      const fileList = Array.from(e.target.files).filter((file) =>
         file.type.startsWith('image/')
       );
       setFiles(fileList);
@@ -50,11 +49,11 @@ function App() {
     if (files.length === 0) return;
 
     setUploading(true);
-    setTaxonomy(null);
+    setIndividualHashtags(null);
 
     try {
       const formData = new FormData();
-      files.forEach(file => {
+      files.forEach((file) => {
         formData.append('files', file);
       });
 
@@ -64,11 +63,11 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to upload images');
+        throw new Error(`Failed to upload images: ${response.statusText}`);
       }
 
       const result = await response.json();
-      setTaxonomy(result.taxonomy);
+      setIndividualHashtags(result.individual_hashtags);
       setSessionId(result.session_id);
     } catch (error) {
       console.error('Error uploading images:', error);
@@ -81,47 +80,41 @@ function App() {
   const loadSessions = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/sessions`);
+      if (!response.ok) {
+        throw new Error('Failed to load sessions');
+      }
       const data = await response.json();
       setSessions(data.sessions);
       setShowSessions(true);
     } catch (error) {
       console.error('Error loading sessions:', error);
+      alert('Error loading sessions. Please try again.');
     }
   };
 
   const loadSession = async (sessionId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/taxonomy/${sessionId}`);
+      if (!response.ok) {
+        throw new Error('Failed to load session');
+      }
       const data = await response.json();
-      setTaxonomy(data.taxonomy);
+      // Backend returns taxonomy, but we need individual_hashtags
+      setIndividualHashtags(data.individual_hashtags || null);
       setSessionId(sessionId);
       setShowSessions(false);
     } catch (error) {
       console.error('Error loading session:', error);
+      setIndividualHashtags(null);
+      setShowSessions(false);
+      alert('Error loading session. Please try again.');
     }
   };
 
   const clearFiles = () => {
     setFiles([]);
-    setTaxonomy(null);
+    setIndividualHashtags(null); // Fixed: Replaced setTaxonomy with setIndividualHashtags
     setSessionId(null);
-  };
-
-  const getFilteredHashtags = () => {
-    if (!taxonomy?.deduplicated_hashtags) return {};
-    
-    if (selectedCategory === 'all') {
-      return taxonomy.deduplicated_hashtags;
-    }
-    
-    return {
-      [selectedCategory]: taxonomy.deduplicated_hashtags[selectedCategory] || []
-    };
-  };
-
-  const getTotalHashtags = () => {
-    if (!taxonomy?.deduplicated_hashtags) return 0;
-    return Object.values(taxonomy.deduplicated_hashtags).reduce((sum, arr) => sum + arr.length, 0);
   };
 
   return (
@@ -284,113 +277,49 @@ function App() {
         </div>
 
         {/* Results Section */}
-        {taxonomy && (
+        {individualHashtags && (
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
-                Generated Taxonomy
+                Generated Hashtags Per Image
               </h2>
               <div className="text-sm text-gray-600">
                 Session: {sessionId?.slice(0, 8)}...
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-2xl font-bold text-purple-600">
-                  {taxonomy.hashtag_count?.deduplicated_total || 0}
-                </div>
-                <div className="text-sm text-gray-600">Final Hashtags</div>
-              </div>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">
-                  {taxonomy.hashtag_count?.original_total || 0}
-                </div>
-                <div className="text-sm text-gray-600">Original Features</div>
-              </div>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">
-                  {taxonomy.hashtag_count?.duplicates_removed || 0}
-                </div>
-                <div className="text-sm text-gray-600">Duplicates Removed</div>
-              </div>
-            </div>
-
-            {/* Category Filter */}
-            <div className="mb-6">
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    selectedCategory === 'all'
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  All Categories
-                </button>
-                {Object.keys(taxonomy.deduplicated_hashtags || {}).map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
-                      selectedCategory === category
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {category} ({taxonomy.deduplicated_hashtags[category]?.length || 0})
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Hashtags Display */}
+            {/* Display individual hashtags per image */}
             <div className="space-y-6">
-              {Object.entries(getFilteredHashtags()).map(([category, hashtags]) => (
-                <div key={category}>
-                  <h3 className="text-lg font-semibold capitalize mb-3 text-gray-800">
-                    {category} ({hashtags.length})
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {hashtags.map((hashtag, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium border border-purple-200"
-                      >
-                        #{hashtag}
-                      </span>
-                    ))}
+              {individualHashtags.map(({ filename, hashtags }) => (
+                <div key={filename} className="border rounded-lg p-4">
+                  <div className="flex items-center gap-4 mb-3">
+                    <img
+                      src={`data:image/jpeg;base64,${individualHashtags.find((img) => img.filename === filename)?.image_base64 || ''}`}
+                      alt={filename}
+                      className="w-20 h-20 object-contain rounded border"
+                      onError={(e) => (e.target.src = '/fallback-image.jpg')} // Optional fallback image
+                    />
+                    <h3 className="text-lg font-semibold text-gray-800Auction
+                    <span>800">{filename}</h3>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Semantic Groups */}
-            {taxonomy.semantic_groups && taxonomy.semantic_groups.length > 0 && (
-              <div className="mt-8 pt-6 border-t">
-                <h3 className="text-lg font-semibold mb-4">Semantic Groups</h3>
-                <div className="space-y-4">
-                  {taxonomy.semantic_groups.map((group, index) => (
-                    <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-medium mb-2">{group.group_name}</h4>
-                      <p className="text-sm text-gray-600 mb-3">{group.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {group.hashtags.map((hashtag, idx) => (
+                  {Object.entries(hashtags).map(([category, tags]) => (
+                    <div key={category} className="mb-2">
+                      <h4 className="font-medium capitalize">{category} ({tags.length})</h4>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-white text-gray-700 rounded text-sm border"
+                            className="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium border border-purple-200"
                           >
-                            #{hashtag}
+                            #{tag}
                           </span>
                         ))}
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
         )}
       </div>

@@ -46,3 +46,625 @@
 2025-06-09 18:26:51,863 - server - INFO - MongoDB connection established
 2025-06-09 18:26:51,863 - server - ERROR - Error initializing or validating Groq client: Client.__init__() got an unexpected keyword argument 'proxies'
 2025-06-09 18:26:52,253 - server - INFO - Database indexes created
+2025-06-11 10:21:35,646 - server - INFO - MongoDB connection established
+2025-06-11 10:21:36,204 - server - INFO - Groq client initialized successfully
+2025-06-11 10:21:36,895 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:21:36,897 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:21:38,863 - server - INFO - Database indexes created
+2025-06-11 10:27:05,234 - server - INFO - Received upload request
+2025-06-11 10:27:05,234 - server - INFO - Processing file: w (385).jpg
+2025-06-11 10:27:05,279 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 10:27:05,280 - server - INFO - Making Groq API call
+2025-06-11 10:27:05,733 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:27:05,737 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:27:05,802 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 10:27:05,803 - server - INFO - Processing file: a (1).jpg
+2025-06-11 10:27:05,807 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 10:27:05,807 - server - INFO - Making Groq API call
+2025-06-11 10:27:06,111 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:27:06,114 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:27:06,168 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 10:27:06,227 - server - INFO - Stored taxonomy for session 03542344-5aa1-45f6-a1e1-50fee9f5f898
+2025-06-11 10:30:32,124 - server - INFO - Database connection closed
+2025-06-11 10:30:34,477 - server - INFO - MongoDB connection established
+2025-06-11 10:30:35,073 - server - INFO - Groq client initialized successfully
+2025-06-11 10:30:35,394 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:30:35,395 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:30:36,790 - server - INFO - Database indexes created
+2025-06-11 10:31:43,675 - server - INFO - Database connection closed
+2025-06-11 10:39:04,118 - server - INFO - MongoDB connection established
+2025-06-11 10:39:04,939 - server - INFO - Groq client initialized successfully
+2025-06-11 10:39:05,273 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:39:05,275 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:39:07,212 - server - INFO - Database indexes created
+2025-06-11 10:39:23,374 - server - INFO - Received upload request
+2025-06-11 10:39:23,375 - server - INFO - Processing file: w (385).jpg
+2025-06-11 10:39:23,399 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 10:39:23,399 - server - INFO - Making Groq API call
+2025-06-11 10:39:23,911 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:39:23,911 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:39:24,104 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 10:39:24,105 - server - INFO - Processing file: a (1).jpg
+2025-06-11 10:39:24,115 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 10:39:24,116 - server - INFO - Making Groq API call
+2025-06-11 10:39:24,416 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:39:24,416 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:39:24,508 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 10:39:24,571 - server - INFO - Stored taxonomy for session 3cc768d3-57ba-4562-a281-fcf3dca9a74c
+2025-06-11 10:39:24,572 - server - ERROR - Error processing images: 'image_base64'
+2025-06-11 10:39:41,421 - server - ERROR - Error retrieving sessions: 'NoneType' object has no attribute 'get'
+2025-06-11 10:45:41,155 - server - INFO - Database connection closed
+2025-06-11 10:45:43,105 - server - INFO - MongoDB connection established
+2025-06-11 10:45:43,702 - server - INFO - Groq client initialized successfully
+2025-06-11 10:45:44,034 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:45:44,035 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:45:45,307 - server - INFO - Database indexes created
+2025-06-11 10:47:05,299 - server - INFO - Received upload request
+2025-06-11 10:47:05,301 - server - INFO - Processing file: w (385).jpg
+2025-06-11 10:47:05,317 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 10:47:05,317 - server - INFO - Making Groq API call
+2025-06-11 10:47:05,783 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:47:05,785 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:47:05,974 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 10:47:05,974 - server - INFO - Processing file: a (1).jpg
+2025-06-11 10:47:05,978 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 10:47:05,979 - server - INFO - Making Groq API call
+2025-06-11 10:47:07,011 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:47:07,012 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:47:07,110 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 10:47:07,176 - server - INFO - Stored taxonomy for session aa2aa471-5945-44a2-8adf-c520f1417f35
+2025-06-11 10:48:30,563 - server - INFO - Database connection closed
+2025-06-11 10:48:32,314 - server - INFO - MongoDB connection established
+2025-06-11 10:48:32,859 - server - INFO - Groq client initialized successfully
+2025-06-11 10:48:33,188 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:48:33,191 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:48:37,021 - server - INFO - Database indexes created
+2025-06-11 10:49:24,291 - server - INFO - Received upload request
+2025-06-11 10:49:24,291 - server - INFO - Processing file: w (385).jpg
+2025-06-11 10:49:24,307 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 10:49:24,307 - server - INFO - Making Groq API call
+2025-06-11 10:49:24,900 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:49:25,245 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:49:25,501 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 10:49:25,502 - server - INFO - Processing file: a (1).jpg
+2025-06-11 10:49:25,513 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 10:49:25,514 - server - INFO - Making Groq API call
+2025-06-11 10:49:25,849 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:49:25,850 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:49:25,940 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 10:49:26,011 - server - INFO - Stored taxonomy for session 433659c7-54c5-41c0-8535-f40bfdd528f3
+2025-06-11 10:49:46,159 - server - ERROR - Error retrieving sessions: 'NoneType' object has no attribute 'get'
+2025-06-11 10:54:00,523 - server - INFO - Database connection closed
+2025-06-11 10:54:05,622 - server - INFO - MongoDB connection established
+2025-06-11 10:54:06,120 - server - INFO - Groq client initialized successfully
+2025-06-11 10:54:06,430 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 10:54:06,431 - server - ERROR - Error initializing or validating Groq client: Error code: 400 - {'error': {'message': 'The model `mixtral-8x7b-32768` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-06-11 10:54:07,812 - server - INFO - Database indexes created
+2025-06-11 10:54:18,198 - server - ERROR - Error retrieving sessions: 'NoneType' object has no attribute 'get'
+2025-06-11 10:54:32,338 - server - INFO - Received upload request
+2025-06-11 10:54:32,339 - server - INFO - Processing file: w (385).jpg
+2025-06-11 10:54:32,355 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 10:54:32,355 - server - INFO - Making Groq API call
+2025-06-11 10:54:32,772 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:54:32,774 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:54:32,975 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 10:54:32,975 - server - INFO - Processing file: a (1).jpg
+2025-06-11 10:54:32,986 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 10:54:32,987 - server - INFO - Making Groq API call
+2025-06-11 10:54:33,294 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 10:54:33,297 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 10:54:33,388 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 10:54:33,445 - server - INFO - Stored taxonomy for session 3511304f-1a3e-40e5-92e4-a2d406f48cf6
+2025-06-11 11:11:07,319 - server - INFO - Database connection closed
+2025-06-11 11:11:09,129 - server - INFO - MongoDB connection established
+2025-06-11 11:11:09,715 - server - INFO - Groq client initialized successfully
+2025-06-11 11:11:10,046 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:11:10,047 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:11:11,465 - server - INFO - Database indexes created
+2025-06-11 11:12:13,663 - server - INFO - Database connection closed
+2025-06-11 11:12:21,125 - server - INFO - MongoDB connection established
+2025-06-11 11:12:21,651 - server - INFO - Groq client initialized successfully
+2025-06-11 11:12:21,946 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:12:21,947 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:12:24,415 - server - INFO - Database indexes created
+2025-06-11 11:12:38,307 - server - INFO - Received upload request
+2025-06-11 11:12:38,307 - server - INFO - Processing file: w (385).jpg
+2025-06-11 11:12:38,326 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 11:12:38,326 - server - INFO - Making Groq API call
+2025-06-11 11:12:38,966 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:12:38,967 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 11:12:39,177 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 11:12:39,178 - server - INFO - Processing file: a (1).jpg
+2025-06-11 11:12:39,187 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 11:12:39,188 - server - INFO - Making Groq API call
+2025-06-11 11:12:40,437 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:12:40,439 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'Unknown request URL: POST /openai/openai/v1/chat/completions. Please check the URL for typos, or see the docs at https://console.groq.com/docs/', 'type': 'invalid_request_error', 'code': 'unknown_url'}}
+2025-06-11 11:12:40,533 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 11:12:40,597 - server - INFO - Stored taxonomy for session 41c94882-7ece-474b-9080-0ad462256c04
+2025-06-11 11:14:32,195 - server - INFO - Database connection closed
+2025-06-11 11:14:54,404 - server - INFO - MongoDB connection established
+2025-06-11 11:14:55,058 - server - INFO - Groq client initialized successfully
+2025-06-11 11:14:55,387 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:14:55,388 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:14:56,752 - server - INFO - Database indexes created
+2025-06-11 11:15:08,413 - server - INFO - Database connection closed
+2025-06-11 11:15:10,769 - server - INFO - MongoDB connection established
+2025-06-11 11:15:11,401 - server - INFO - Groq client initialized successfully
+2025-06-11 11:15:11,709 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:15:11,729 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:15:12,937 - server - INFO - Database indexes created
+2025-06-11 11:20:24,479 - server - INFO - Database connection closed
+2025-06-11 11:20:26,205 - server - INFO - MongoDB connection established
+2025-06-11 11:20:26,702 - server - INFO - Groq client initialized successfully
+2025-06-11 11:20:27,065 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:20:27,066 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:20:28,440 - server - INFO - Database indexes created
+2025-06-11 11:23:42,473 - server - INFO - Database connection closed
+2025-06-11 11:23:44,408 - server - INFO - MongoDB connection established
+2025-06-11 11:23:44,946 - server - INFO - Groq client initialized successfully
+2025-06-11 11:23:45,268 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:23:45,271 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:23:46,584 - server - INFO - Database indexes created
+2025-06-11 11:24:04,251 - server - INFO - Database connection closed
+2025-06-11 11:24:08,726 - server - INFO - MongoDB connection established
+2025-06-11 11:24:09,214 - server - INFO - Groq client initialized successfully
+2025-06-11 11:24:09,550 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:24:09,553 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:24:11,713 - server - INFO - Database indexes created
+2025-06-11 11:25:08,696 - server - INFO - Database connection closed
+2025-06-11 11:25:10,914 - server - INFO - MongoDB connection established
+2025-06-11 11:25:11,535 - server - INFO - Groq client initialized successfully
+2025-06-11 11:25:11,877 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:25:11,879 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-mini` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:25:13,133 - server - INFO - Database indexes created
+2025-06-11 11:25:13,186 - server - INFO - Database connection closed
+2025-06-11 11:25:14,975 - server - INFO - MongoDB connection established
+2025-06-11 11:25:15,481 - server - INFO - Groq client initialized successfully
+2025-06-11 11:25:15,783 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 11:25:15,783 - server - ERROR - Error initializing or validating Groq client: Error code: 404 - {'error': {'message': 'The model `gpt-4o-minideepseek-r1-distill-llama-70b` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 11:25:16,987 - server - INFO - Database indexes created
+2025-06-11 11:25:20,701 - server - INFO - Database connection closed
+2025-06-11 11:25:22,398 - server - INFO - MongoDB connection established
+2025-06-11 11:25:22,901 - server - INFO - Groq client initialized successfully
+2025-06-11 11:25:23,567 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:25:23,574 - server - INFO - Groq API key validated successfully
+2025-06-11 11:25:24,202 - server - INFO - Database indexes created
+2025-06-11 11:25:24,250 - server - INFO - Database connection closed
+2025-06-11 11:25:25,896 - server - INFO - MongoDB connection established
+2025-06-11 11:25:26,414 - server - INFO - Groq client initialized successfully
+2025-06-11 11:25:27,027 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:25:27,030 - server - INFO - Groq API key validated successfully
+2025-06-11 11:25:27,773 - server - INFO - Database indexes created
+2025-06-11 11:25:46,146 - server - INFO - Database connection closed
+2025-06-11 11:25:49,427 - server - INFO - MongoDB connection established
+2025-06-11 11:25:49,914 - server - INFO - Groq client initialized successfully
+2025-06-11 11:25:50,543 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:25:50,552 - server - INFO - Groq API key validated successfully
+2025-06-11 11:25:51,271 - server - INFO - Database indexes created
+2025-06-11 11:26:09,266 - server - INFO - Received upload request
+2025-06-11 11:26:09,266 - server - INFO - Processing file: w (385).jpg
+2025-06-11 11:26:09,286 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 11:26:09,286 - server - INFO - Making Groq API call
+2025-06-11 11:26:11,828 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 11:26:11,831 - server - ERROR - Error analyzing image with Groq: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'max completion tokens reached before generating a valid document'}}
+2025-06-11 11:26:12,032 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 11:26:12,033 - server - INFO - Processing file: a (1).jpg
+2025-06-11 11:26:12,043 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 11:26:12,046 - server - INFO - Making Groq API call
+2025-06-11 11:26:14,263 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-06-11 11:26:14,264 - server - ERROR - Error analyzing image with Groq: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'max completion tokens reached before generating a valid document'}}
+2025-06-11 11:26:14,358 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 11:26:14,426 - server - INFO - Stored taxonomy for session eecf47e4-416c-443b-8814-5bbea58fbe63
+2025-06-11 11:27:38,574 - server - INFO - Database connection closed
+2025-06-11 11:44:41,637 - server - INFO - MongoDB connection established
+2025-06-11 11:44:42,160 - server - INFO - Groq client initialized successfully
+2025-06-11 11:44:42,576 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:44:42,584 - server - INFO - Groq API key validated successfully
+2025-06-11 11:44:44,023 - server - INFO - MongoDB connection established
+2025-06-11 11:44:44,559 - server - INFO - Groq client initialized successfully
+2025-06-11 11:44:44,999 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:44:45,010 - server - INFO - Groq API key validated successfully
+2025-06-11 11:45:34,603 - server - INFO - MongoDB connection established
+2025-06-11 11:45:35,141 - server - INFO - Groq client initialized successfully
+2025-06-11 11:45:35,584 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:45:35,586 - server - INFO - Groq API key validated successfully
+2025-06-11 11:45:42,961 - server - INFO - MongoDB connection established
+2025-06-11 11:45:43,522 - server - INFO - Groq client initialized successfully
+2025-06-11 11:45:43,949 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:45:43,960 - server - INFO - Groq API key validated successfully
+2025-06-11 11:45:56,713 - server - INFO - MongoDB connection established
+2025-06-11 11:45:57,283 - server - INFO - Groq client initialized successfully
+2025-06-11 11:45:57,625 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:45:57,634 - server - INFO - Groq API key validated successfully
+2025-06-11 11:53:04,883 - server - INFO - MongoDB connection established
+2025-06-11 11:53:05,814 - server - INFO - Groq client initialized successfully
+2025-06-11 11:53:06,162 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:53:06,169 - server - INFO - Groq API key validated successfully
+2025-06-11 11:53:07,470 - server - INFO - MongoDB connection established
+2025-06-11 11:53:07,992 - server - INFO - Groq client initialized successfully
+2025-06-11 11:53:08,333 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:53:08,338 - server - INFO - Groq API key validated successfully
+2025-06-11 11:55:01,202 - server - INFO - MongoDB connection established
+2025-06-11 11:55:01,696 - server - INFO - Groq client initialized successfully
+2025-06-11 11:55:02,022 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 11:55:02,032 - server - INFO - Groq API key validated successfully
+2025-06-11 12:14:11,674 - server - INFO - MongoDB connection established
+2025-06-11 12:14:12,190 - server - INFO - Groq client initialized successfully
+2025-06-11 12:14:12,563 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:12,565 - server - INFO - Groq API key validated successfully
+2025-06-11 12:14:14,241 - server - INFO - MongoDB connection established
+2025-06-11 12:14:14,811 - server - INFO - Groq client initialized successfully
+2025-06-11 12:14:15,189 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:15,192 - server - INFO - Groq API key validated successfully
+2025-06-11 12:14:16,511 - server - INFO - MongoDB connection established
+2025-06-11 12:14:17,068 - server - INFO - Groq client initialized successfully
+2025-06-11 12:14:17,429 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:17,434 - server - INFO - Groq API key validated successfully
+2025-06-11 12:14:46,737 - server - INFO - MongoDB connection established
+2025-06-11 12:14:47,249 - server - INFO - Groq client initialized successfully
+2025-06-11 12:14:47,607 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:47,609 - server - INFO - Groq API key validated successfully
+2025-06-11 12:14:57,153 - server - INFO - Received upload request
+2025-06-11 12:14:57,154 - server - INFO - Processing file: w (385).jpg
+2025-06-11 12:14:57,170 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 12:14:57,171 - server - INFO - Making Groq API call
+2025-06-11 12:14:57,885 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:57,889 - server - INFO - Raw Groq response content: {
+   "materials": [
+      "gold",
+      "silver",
+      "platinum",
+      "copper",
+      "brass",
+      "diamond",
+      "ruby",
+      "emerald",
+      "pearl",
+      "bead"
+   ],
+   "colors": [
+      "gold",
+      "silver",
+      "red",
+      "blue"
+   ],
+   "patterns": [
+      "filigree",
+      "engraved",
+      "plain"
+   ],
+   "motifs": [
+      "floral",
+      "geometric",
+      "abstract"
+   ],
+   "styles": [
+      "vintage",
+      "modern",
+      "minimalist",
+      "ornate"
+   ],
+   "functional": [
+      "ring",
+      "necklace",
+      "bracelet",
+      "earrings"
+   ]
+}
+2025-06-11 12:14:57,901 - server - INFO - Parsed analysis data: {'materials': ['gold', 'silver', 'platinum', 'copper', 'brass', 'diamond', 'ruby', 'emerald', 'pearl', 'bead'], 'colors': ['gold', 'silver', 'red', 'blue'], 'patterns': ['filigree', 'engraved', 'plain'], 'motifs': ['floral', 'geometric', 'abstract'], 'styles': ['vintage', 'modern', 'minimalist', 'ornate'], 'functional': ['ring', 'necklace', 'bracelet', 'earrings']}
+2025-06-11 12:14:58,666 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 12:14:58,670 - server - INFO - Processing file: a (1).jpg
+2025-06-11 12:14:58,681 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 12:14:58,681 - server - INFO - Making Groq API call
+2025-06-11 12:14:59,317 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:14:59,321 - server - INFO - Raw Groq response content: {
+   "materials": [
+      "gold",
+      "silver",
+      "diamond",
+      "ruby",
+      "emerald",
+      "pearl",
+      "bead",
+      "copper",
+      "brass",
+      "platinum"
+   ],
+   "colors": [
+      "gold",
+      "silver",
+      "red",
+      "blue"
+   ],
+   "patterns": [
+      "filigree",
+      "engraved",
+      "plain"
+   ],
+   "motifs": [
+      "floral",
+      "geometric",
+      "abstract"
+   ],
+   "styles": [
+      "vintage",
+      "modern",
+      "minimalist",
+      "ornate"
+   ],
+   "functional": [
+      "ring",
+      "necklace",
+      "bracelet",
+      "earrings"
+   ]
+}
+2025-06-11 12:14:59,325 - server - INFO - Parsed analysis data: {'materials': ['gold', 'silver', 'diamond', 'ruby', 'emerald', 'pearl', 'bead', 'copper', 'brass', 'platinum'], 'colors': ['gold', 'silver', 'red', 'blue'], 'patterns': ['filigree', 'engraved', 'plain'], 'motifs': ['floral', 'geometric', 'abstract'], 'styles': ['vintage', 'modern', 'minimalist', 'ornate'], 'functional': ['ring', 'necklace', 'bracelet', 'earrings']}
+2025-06-11 12:14:59,401 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 12:14:59,451 - server - INFO - Stored taxonomy for session 2cc8967c-5bdc-42bd-8504-c54cda30b687
+2025-06-11 12:29:59,255 - server - INFO - MongoDB connection established
+2025-06-11 12:29:59,792 - server - INFO - Groq client initialized successfully
+2025-06-11 12:30:00,368 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:30:00,371 - server - INFO - Groq API key validated successfully
+2025-06-11 12:30:28,458 - server - INFO - MongoDB connection established
+2025-06-11 12:30:28,965 - server - INFO - Groq client initialized successfully
+2025-06-11 12:30:29,268 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:30:29,271 - server - INFO - Groq API key validated successfully
+2025-06-11 12:31:58,185 - server - INFO - MongoDB connection established
+2025-06-11 12:31:58,693 - server - INFO - Groq client initialized successfully
+2025-06-11 12:31:59,065 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:31:59,072 - server - INFO - Groq API key validated successfully
+2025-06-11 12:32:28,832 - server - INFO - Received upload request
+2025-06-11 12:32:28,833 - server - INFO - Processing file: w (385).jpg
+2025-06-11 12:32:28,850 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 12:32:28,850 - server - INFO - Making Groq API call
+2025-06-11 12:32:29,544 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:32:29,547 - server - INFO - Raw Groq response content: {
+   "materials":[
+      "gold",
+      "silver",
+      "platinum",
+      "copper",
+      "brass",
+      "diamond",
+      "ruby",
+      "emerald",
+      "bead",
+      "pearl"
+   ],
+   "colors":[
+      "gold",
+      "silver",
+      "red",
+      "blue"
+   ],
+   "patterns":[
+      "filigree",
+      "engraved",
+      "plain"
+   ],
+   "motifs":[
+      "floral",
+      "geometric",
+      "abstract"
+   ],
+   "styles":[
+      "vintage",
+      "modern",
+      "minimalist",
+      "ornate"
+   ],
+   "functional":[
+      "ring",
+      "necklace",
+      "bracelet",
+      "earrings"
+   ]
+}
+2025-06-11 12:32:29,563 - server - INFO - Parsed analysis data: {'materials': ['gold', 'silver', 'platinum', 'copper', 'brass', 'diamond', 'ruby', 'emerald', 'bead', 'pearl'], 'colors': ['gold', 'silver', 'red', 'blue'], 'patterns': ['filigree', 'engraved', 'plain'], 'motifs': ['floral', 'geometric', 'abstract'], 'styles': ['vintage', 'modern', 'minimalist', 'ornate'], 'functional': ['ring', 'necklace', 'bracelet', 'earrings']}
+2025-06-11 12:32:30,156 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 12:32:30,157 - server - INFO - Processing file: a (1).jpg
+2025-06-11 12:32:30,162 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 12:32:30,162 - server - INFO - Making Groq API call
+2025-06-11 12:32:30,785 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:32:30,789 - server - INFO - Raw Groq response content: {
+   "materials": [
+      "gold",
+      "silver",
+      "platinum",
+      "copper",
+      "brass",
+      "diamond",
+      "ruby",
+      "emerald",
+      "pearl",
+      "bead"
+   ],
+   "colors": [
+      "gold",
+      "silver",
+      "red",
+      "blue"
+   ],
+   "patterns": [
+      "filigree",
+      "engraved",
+      "plain"
+   ],
+   "motifs": [
+      "floral",
+      "geometric",
+      "abstract"
+   ],
+   "styles": [
+      "vintage",
+      "modern",
+      "minimalist",
+      "ornate"
+   ],
+   "functional": [
+      "ring",
+      "necklace",
+      "bracelet",
+      "earrings"
+   ]
+}
+2025-06-11 12:32:30,800 - server - INFO - Parsed analysis data: {'materials': ['gold', 'silver', 'platinum', 'copper', 'brass', 'diamond', 'ruby', 'emerald', 'pearl', 'bead'], 'colors': ['gold', 'silver', 'red', 'blue'], 'patterns': ['filigree', 'engraved', 'plain'], 'motifs': ['floral', 'geometric', 'abstract'], 'styles': ['vintage', 'modern', 'minimalist', 'ornate'], 'functional': ['ring', 'necklace', 'bracelet', 'earrings']}
+2025-06-11 12:32:30,897 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 12:32:30,927 - server - INFO - Stored taxonomy for session d6e83593-4078-4b9c-91e8-736b65617b23
+2025-06-11 12:40:37,337 - server - INFO - MongoDB connection established
+2025-06-11 12:40:37,842 - server - INFO - Groq client initialized successfully
+2025-06-11 12:40:38,166 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:40:38,169 - server - INFO - Groq API key validated successfully
+2025-06-11 12:43:35,335 - server - INFO - MongoDB connection established
+2025-06-11 12:43:35,914 - server - INFO - Groq client initialized successfully
+2025-06-11 12:43:36,248 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:43:36,252 - server - INFO - Groq API key validated successfully
+2025-06-11 12:43:37,611 - server - INFO - MongoDB connection established
+2025-06-11 12:43:38,165 - server - INFO - Groq client initialized successfully
+2025-06-11 12:43:38,435 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:43:38,444 - server - INFO - Groq API key validated successfully
+2025-06-11 12:43:50,484 - server - INFO - Received upload request
+2025-06-11 12:43:50,484 - server - INFO - Processing file: w (385).jpg
+2025-06-11 12:43:50,504 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 12:43:50,504 - server - INFO - Making Groq API call
+2025-06-11 12:43:50,707 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 12:43:50,710 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'The model `llava-v1.5-34b` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 12:43:51,248 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 12:43:51,248 - server - INFO - Processing file: a (1).jpg
+2025-06-11 12:43:51,252 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 12:43:51,253 - server - INFO - Making Groq API call
+2025-06-11 12:43:51,330 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-06-11 12:43:51,331 - server - ERROR - Error analyzing image with Groq: Error code: 404 - {'error': {'message': 'The model `llava-v1.5-34b` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+2025-06-11 12:43:51,417 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 12:43:51,443 - server - INFO - Stored taxonomy for session ee6a8ee8-2eac-423a-958a-b2305011ef90
+2025-06-11 12:47:38,653 - server - INFO - MongoDB connection established
+2025-06-11 12:47:39,178 - server - INFO - Groq client initialized successfully
+2025-06-11 12:47:39,518 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:47:39,520 - server - INFO - Groq API key validated successfully
+2025-06-11 12:47:41,043 - server - INFO - MongoDB connection established
+2025-06-11 12:47:41,565 - server - INFO - Groq client initialized successfully
+2025-06-11 12:47:41,949 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:47:41,955 - server - INFO - Groq API key validated successfully
+2025-06-11 12:49:47,958 - server - INFO - MongoDB connection established
+2025-06-11 12:49:48,506 - server - INFO - Groq client initialized successfully
+2025-06-11 12:49:48,772 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:49:48,776 - server - INFO - Groq API key validated successfully
+2025-06-11 12:49:50,944 - server - INFO - MongoDB connection established
+2025-06-11 12:49:51,448 - server - INFO - Groq client initialized successfully
+2025-06-11 12:49:51,741 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:49:51,743 - server - INFO - Groq API key validated successfully
+2025-06-11 12:50:21,859 - server - INFO - MongoDB connection established
+2025-06-11 12:50:22,400 - server - INFO - Groq client initialized successfully
+2025-06-11 12:50:22,666 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:50:22,676 - server - INFO - Groq API key validated successfully
+2025-06-11 12:50:24,855 - server - INFO - MongoDB connection established
+2025-06-11 12:50:25,361 - server - INFO - Groq client initialized successfully
+2025-06-11 12:50:25,637 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:50:25,642 - server - INFO - Groq API key validated successfully
+2025-06-11 12:50:35,018 - server - INFO - MongoDB connection established
+2025-06-11 12:50:35,591 - server - INFO - Groq client initialized successfully
+2025-06-11 12:50:35,876 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:50:35,879 - server - INFO - Groq API key validated successfully
+2025-06-11 12:50:38,230 - server - INFO - MongoDB connection established
+2025-06-11 12:50:38,708 - server - INFO - Groq client initialized successfully
+2025-06-11 12:50:38,994 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:50:38,998 - server - INFO - Groq API key validated successfully
+2025-06-11 12:50:51,348 - server - INFO - MongoDB connection established
+2025-06-11 12:50:51,850 - server - INFO - Groq client initialized successfully
+2025-06-11 12:50:52,171 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 12:50:52,174 - server - INFO - Groq API key validated successfully
+2025-06-11 12:51:23,496 - server - INFO - Received upload request
+2025-06-11 12:51:23,496 - server - INFO - Processing file: w (385).jpg
+2025-06-11 12:51:23,512 - server - INFO - Analyzing image: w (385).jpg
+2025-06-11 12:51:35,328 - server - ERROR - Error analyzing image: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-06-11 12:51:35,833 - server - INFO - Stored analysis for w (385).jpg in database
+2025-06-11 12:51:35,833 - server - INFO - Processing file: a (1).jpg
+2025-06-11 12:51:35,837 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 12:51:47,970 - server - ERROR - Error analyzing image: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-06-11 12:51:48,063 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 12:51:48,090 - server - INFO - Stored taxonomy for session cc1b66ea-89f0-4a1b-bf46-f92ac3dd9c35
+2025-06-11 12:52:23,863 - server - INFO - Received upload request
+2025-06-11 12:52:23,864 - server - INFO - Processing file: a (1).jpg
+2025-06-11 12:52:23,867 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 12:52:36,042 - server - ERROR - Error analyzing image: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-06-11 12:52:36,128 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 12:52:36,151 - server - INFO - Stored taxonomy for session b51c6852-bcc6-4760-82ac-3827691b2fcc
+2025-06-11 13:15:59,424 - server - INFO - MongoDB connection established
+2025-06-11 13:16:00,129 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:00,464 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:00,472 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:02,780 - server - INFO - MongoDB connection established
+2025-06-11 13:16:03,284 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:03,543 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:03,546 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:06,032 - server - INFO - MongoDB connection established
+2025-06-11 13:16:06,656 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:06,939 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:06,942 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:09,394 - server - INFO - MongoDB connection established
+2025-06-11 13:16:09,942 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:10,210 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:10,212 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:12,346 - server - INFO - MongoDB connection established
+2025-06-11 13:16:12,869 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:13,168 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:13,172 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:19,909 - server - INFO - MongoDB connection established
+2025-06-11 13:16:20,419 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:20,687 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:20,694 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:29,665 - server - INFO - MongoDB connection established
+2025-06-11 13:16:30,172 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:30,478 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:30,483 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:32,961 - server - INFO - MongoDB connection established
+2025-06-11 13:16:33,530 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:33,832 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:33,836 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:36,047 - server - INFO - MongoDB connection established
+2025-06-11 13:16:36,555 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:36,820 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:36,823 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:40,857 - server - INFO - MongoDB connection established
+2025-06-11 13:16:41,405 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:41,697 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:41,700 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:45,236 - server - INFO - MongoDB connection established
+2025-06-11 13:16:45,762 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:46,046 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:46,054 - server - INFO - Groq API key validated successfully
+2025-06-11 13:16:48,287 - server - INFO - MongoDB connection established
+2025-06-11 13:16:48,795 - server - INFO - Groq client initialized successfully
+2025-06-11 13:16:49,068 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:16:49,076 - server - INFO - Groq API key validated successfully
+2025-06-11 13:17:21,452 - server - INFO - MongoDB connection established
+2025-06-11 13:17:21,942 - server - INFO - Groq client initialized successfully
+2025-06-11 13:17:22,206 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-11 13:17:22,217 - server - INFO - Groq API key validated successfully
+2025-06-11 13:17:55,542 - server - INFO - Received upload request
+2025-06-11 13:17:55,542 - server - INFO - Processing file: a (1).jpg
+2025-06-11 13:17:55,558 - server - INFO - Analyzing image: a (1).jpg
+2025-06-11 13:17:56,439 - server - ERROR - Error analyzing image: 403 This API method requires billing to be enabled. Please enable billing on project #jewellery-image by visiting https://console.developers.google.com/billing/enable?project=jewellery-image then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry. [reason: "BILLING_DISABLED"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "vision.googleapis.com"
+}
+metadata {
+  key: "containerInfo"
+  value: "jewellery-image"
+}
+metadata {
+  key: "consumer"
+  value: "projects/jewellery-image"
+}
+, locale: "en-US"
+message: "This API method requires billing to be enabled. Please enable billing on project #jewellery-image by visiting https://console.developers.google.com/billing/enable?project=jewellery-image then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry."
+, links {
+  description: "Google developers console billing"
+  url: "https://console.developers.google.com/billing/enable?project=jewellery-image"
+}
+]
+2025-06-11 13:17:57,000 - server - INFO - Stored analysis for a (1).jpg in database
+2025-06-11 13:17:57,263 - server - INFO - Stored taxonomy for session e0cc27ad-1236-4e7c-a391-158f066f74be

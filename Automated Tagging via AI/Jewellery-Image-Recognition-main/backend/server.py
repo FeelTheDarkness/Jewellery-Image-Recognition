@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from google.cloud import vision
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from groq import Groq
@@ -13,6 +14,7 @@ from dotenv import load_dotenv
 from PIL import Image
 import io
 import logging
+import httpx
 
 # Configure logging
 logging.basicConfig(
@@ -29,7 +31,7 @@ app = FastAPI()
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -50,21 +52,17 @@ except Exception as e:
 try:
     groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     logger.info("Groq client initialized successfully")
-    # Test Groq API key
     test_response = groq_client.chat.completions.create(
-        model="mixtral-8x7b-32768",
+        model="llama3-70b-8192",
         messages=[{"role": "user", "content": "Test"}],
         max_tokens=10,
     )
     logger.info("Groq API key validated successfully")
 except Exception as e:
     logger.error(f"Error initializing or validating Groq client: {str(e)}")
-    import httpx
-    from groq._client import Groq as GroqClient
-
-    groq_client = GroqClient(
+    groq_client = Groq(
         api_key=os.getenv("GROQ_API_KEY"),
-        base_url="https://api.groq.com/openai",
+        base_url="https://api.groq.com",
         http_client=httpx.Client(timeout=60.0),
     )
 
@@ -72,29 +70,31 @@ except Exception as e:
 images_collection = db.images
 taxonomies_collection = db.taxonomies
 
+# Lifespan events
+from contextlib import asynccontextmanager
 
-@app.on_event("startup")
-async def startup_db_client():
-    """Initialize database indexes"""
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     try:
-        await images_collection.create_index("session_id")
-        await taxonomies_collection.create_index("session_id")
+        await images_collection.create_index([("session_id", 1)])
+        await taxonomies_collection.create_index([("session_id", 1)])
         logger.info("Database indexes created")
     except Exception as e:
         logger.error(f"Error creating database indexes: {str(e)}")
         raise Exception(f"Error creating database indexes: {str(e)}")
-
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    """Close database connection"""
+    yield
     client.close()
     logger.info("Database connection closed")
 
 
+app.lifespan = lifespan
+
+
 def optimize_image(image_data: bytes, max_size: tuple = (800, 600)) -> str:
-    """Optimize image for AI analysis"""
     try:
+        if not image_data:
+            raise ValueError("Empty image data")
         image = Image.open(io.BytesIO(image_data))
         if image.mode in ("RGBA", "P"):
             image = image.convert("RGB")
@@ -108,89 +108,100 @@ def optimize_image(image_data: bytes, max_size: tuple = (800, 600)) -> str:
 
 
 async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str, Any]:
-    """Analyze image using Groq AI (text-only fallback)"""
     logger.info(f"Analyzing image: {filename}")
     try:
-        # Comprehensive prompt for feature extraction
-        analysis_prompt = """
-        Based on the description of a jewelry image, extract comprehensive visual features for hashtag generation.
-        
-        Image description: This is a jewelry image likely containing metals (e.g., gold, silver), gemstones (e.g., diamond, ruby), and ornate designs. The jewelry type could be a ring, necklace, or bracelet.
-        
+        # Step 1: Use Google Cloud Vision to analyze the image
+        vision_client = vision.ImageAnnotatorClient()
+        image_content = base64.b64decode(image_base64)
+        image = vision.Image(content=image_content)
+
+        # Perform label detection and object detection
+        label_response = vision_client.label_detection(image=image)
+        object_response = vision_client.object_localization(image=image)
+
+        # Extract labels and objects
+        labels = [
+            label.description.lower() for label in label_response.label_annotations
+        ]
+        objects = [
+            obj.name.lower() for obj in object_response.localized_object_annotations
+        ]
+        logger.info(f"Vision API labels: {labels}")
+        logger.info(f"Vision API objects: {objects}")
+
+        # Step 2: Create a description for Groq
+        description = f"""
+        Jewelry image analysis:
+        - Detected labels: {', '.join(labels) if labels else 'none'}
+        - Detected objects: {', '.join(objects) if objects else 'none'}
+        """
+        logger.info(f"Vision API description: {description}")
+
+        # Step 3: Use Groq to generate structured tags
+        analysis_prompt = f"""
+        Based on the following jewelry image analysis, extract comprehensive visual features for hashtag generation:
+
+        {description}
+
         Please identify and categorize:
-        
         1. MATERIALS & TEXTURES:
         - Metals (gold, silver, platinum, copper, brass, etc.)
         - Gemstones (diamond, ruby, emerald, etc.)
         - Other materials (pearl, bead, etc.)
         - Surfaces (matte, glossy, textured, smooth, etc.)
-        
         2. COLORS:
         - Dominant colors in the jewelry (e.g., gold, silver, red, blue)
-        
         3. PATTERNS:
         - Any visible patterns (e.g., filigree, engraved, plain)
-        
         4. MOTIFS:
         - Design elements (e.g., floral, geometric, abstract)
-        
         5. STYLES:
         - Style categories (e.g., vintage, modern, minimalist, ornate)
-        
         6. FUNCTIONAL:
         - Jewelry type (e.g., ring, necklace, bracelet, earrings)
-        
-        Provide the response in JSON format with the following structure:
-        {
+
+        Provide the response in JSON format with the following structure. Ensure the JSON is valid and complete:
+        {{
             "materials": [],
             "colors": [],
             "patterns": [],
             "motifs": [],
             "styles": [],
-            "functional": [],
-            "overall_description": ""
-        }
+            "functional": []
+        }}
         """
 
-        # Call Groq API with text-only model
         logger.info("Making Groq API call")
         response = groq_client.chat.completions.create(
-            model="mixtral-8x7b-32768",
+            model="llama3-70b-8192",
             messages=[{"role": "user", "content": analysis_prompt}],
             max_tokens=500,
             temperature=0.7,
             response_format={"type": "json_object"},
         )
 
-        logger.info(response)
+        raw_content = response.choices[0].message.content
+        logger.info(f"Raw Groq response content: {raw_content}")
 
-        analysis_data = json.loads(response.choices[0].message.content)
-        logger.info(analysis_data)
-
-        logger.info(f"Groq response: {analysis_data}")
+        analysis_data = json.loads(raw_content)
+        logger.info(f"Parsed analysis data: {analysis_data}")
 
         return {
             "filename": filename,
             "analysis": analysis_data,
-            "raw_response": response.choices[0].message.content,
+            "raw_response": raw_content,
         }
 
-    except json.JSONDecodeError as e:
-        logger.error(f"Error decoding Groq API response: {str(e)}")
-        raise HTTPException(
-            status_code=500, detail=f"Error decoding Groq API response: {str(e)}"
-        )
     except Exception as e:
-        logger.error(f"Error analyzing image with Groq: {str(e)}")
-        # Fallback response in case Groq API fails
+        logger.error(f"Error analyzing image: {str(e)}")
         fallback_analysis = {
-            "materials": [],
-            "colors": [],
-            "patterns": [],
-            "motifs": [],
-            "styles": [],
-            "functional": [],
-            "overall_description": "Analysis failed due to API error",
+            "materials": ["unknown"],
+            "colors": ["unknown"],
+            "patterns": ["unknown"],
+            "motifs": ["unknown"],
+            "styles": ["unknown"],
+            "functional": ["unknown"],
+            "overall_description": f"Analysis failed: {str(e)}",
         }
         return {
             "filename": filename,
@@ -199,52 +210,40 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
         }
 
 
-async def generate_smart_hashtags(analyses: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Generate and deduplicate hashtags from multiple image analyses"""
+async def generate_smart_hashtags(
+    analyses: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
     try:
-        all_features = {
-            "materials": [],
-            "colors": [],
-            "patterns": [],
-            "motifs": [],
-            "styles": [],
-            "functional": [],
-        }
 
+        def generate_hashtags_for_analysis(
+            data: Dict[str, Any],
+        ) -> Dict[str, List[str]]:
+            all_features = {
+                "materials": [],
+                "colors": [],
+                "patterns": [],
+                "motifs": [],
+                "styles": [],
+                "functional": [],
+            }
+            for category in all_features.keys():
+                if category in data:
+                    all_features[category] = list(set(data[category]))
+            return all_features
+
+        individual_hashtags = []
         for analysis in analyses:
             data = analysis["analysis"]
-            for category, features in all_features.items():
-                if category in data:
-                    features.extend(data[category])
+            hashtags = generate_hashtags_for_analysis(data)
+            individual_hashtags.append(
+                {
+                    "filename": analysis["filename"],
+                    "hashtags": hashtags,
+                    "image_base64": analysis.get("image_base64", ""),
+                }
+            )
 
-        original_total = sum(len(v) for v in all_features.values())
-        deduplicated_hashtags = {
-            category: list(set(features)) for category, features in all_features.items()
-        }
-        deduplicated_total = sum(len(v) for v in deduplicated_hashtags.values())
-
-        semantic_groups = [
-            {
-                "group_name": "Denim Style",
-                "hashtags": ["denim", "blue", "casual"],
-                "description": "Denim-related fashion elements",
-            },
-            {
-                "group_name": "Modern Design",
-                "hashtags": ["modern", "geometric", "abstract"],
-                "description": "Contemporary design elements",
-            },
-        ]
-
-        return {
-            "deduplicated_hashtags": deduplicated_hashtags,
-            "hashtag_count": {
-                "original_total": original_total,
-                "deduplicated_total": deduplicated_total,
-                "duplicates_removed": original_total - deduplicated_total,
-            },
-            "semantic_groups": semantic_groups,
-        }
+        return individual_hashtags
 
     except Exception as e:
         logger.error(f"Error generating hashtags: {str(e)}")
@@ -255,7 +254,6 @@ async def generate_smart_hashtags(analyses: List[Dict[str, Any]]) -> Dict[str, A
 
 @app.post("/api/upload-images")
 async def upload_images(files: List[UploadFile] = File(...)):
-    """Upload and analyze multiple images"""
     logger.info("Received upload request")
     try:
         if not files:
@@ -280,6 +278,7 @@ async def upload_images(files: List[UploadFile] = File(...)):
 
                 image_base64 = optimize_image(image_data)
                 analysis = await analyze_image_with_groq(image_base64, file.filename)
+                analysis["image_base64"] = image_base64
                 analyses.append(analysis)
 
                 image_doc = {
@@ -288,7 +287,7 @@ async def upload_images(files: List[UploadFile] = File(...)):
                     "filename": file.filename,
                     "analysis": analysis,
                     "uploaded_at": datetime.utcnow(),
-                    "image_base64": image_base64[:100] + "...",
+                    "image_base64": image_base64,
                 }
                 await images_collection.insert_one(image_doc)
                 logger.info(f"Stored analysis for {file.filename} in database")
@@ -298,6 +297,7 @@ async def upload_images(files: List[UploadFile] = File(...)):
                 analyses.append(
                     {
                         "filename": file.filename,
+                        "image_base64": "",
                         "analysis": {
                             "materials": ["error"],
                             "colors": ["error"],
@@ -318,12 +318,12 @@ async def upload_images(files: List[UploadFile] = File(...)):
                 status_code=400, detail="No images were successfully processed"
             )
 
-        taxonomy_data = await generate_smart_hashtags(analyses)
+        individual_hashtags = await generate_smart_hashtags(analyses)
 
         taxonomy_doc = {
             "id": str(uuid.uuid4()),
             "session_id": session_id,
-            "taxonomy": taxonomy_data,
+            "taxonomy": {},
             "image_count": len(analyses),
             "created_at": datetime.utcnow(),
         }
@@ -333,8 +333,14 @@ async def upload_images(files: List[UploadFile] = File(...)):
         return {
             "session_id": session_id,
             "images_processed": len(analyses),
-            "taxonomy": taxonomy_data,
-            "individual_analyses": analyses,
+            "individual_hashtags": individual_hashtags,
+            "individual_analyses": [
+                {
+                    **analysis,
+                    "image_base64": analysis.get("image_base64", ""),
+                }
+                for analysis in analyses
+            ],
         }
 
     except Exception as e:
@@ -346,12 +352,21 @@ async def upload_images(files: List[UploadFile] = File(...)):
 
 @app.get("/api/taxonomy/{session_id}")
 async def get_taxonomy(session_id: str):
-    """Get taxonomy for a session"""
     try:
         taxonomy = await taxonomies_collection.find_one({"session_id": session_id})
         if not taxonomy:
             raise HTTPException(status_code=404, detail="Taxonomy not found")
 
+        images = await images_collection.find({"session_id": session_id}).to_list(None)
+        individual_hashtags = [
+            {
+                "filename": img["filename"],
+                "hashtags": img["analysis"]["analysis"],
+                "image_base64": img.get("image_base64", ""),
+            }
+            for img in images
+        ]
+        taxonomy["individual_hashtags"] = individual_hashtags
         taxonomy.pop("_id", None)
         return taxonomy
 
@@ -366,7 +381,6 @@ async def get_taxonomy(session_id: str):
 
 @app.get("/api/sessions")
 async def get_sessions():
-    """Get all analysis sessions"""
     try:
         sessions = []
         async for taxonomy in taxonomies_collection.find().sort("created_at", -1):
@@ -376,7 +390,9 @@ async def get_sessions():
                     "session_id": taxonomy["session_id"],
                     "image_count": taxonomy["image_count"],
                     "created_at": taxonomy["created_at"],
-                    "hashtag_count": taxonomy["taxonomy"].get("hashtag_count", {}),
+                    "hashtag_count": taxonomy.get("taxonomy", {}).get(
+                        "hashtag_count", {}
+                    ),
                 }
             )
 
@@ -391,7 +407,6 @@ async def get_sessions():
 
 @app.get("/api/health")
 async def health_check():
-    """Health check endpoint"""
     return {
         "status": "healthy",
         "groq_api": "connected" if groq_client else "disconnected",
