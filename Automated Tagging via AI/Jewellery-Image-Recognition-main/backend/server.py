@@ -14,7 +14,7 @@ from PIL import Image
 import io
 import logging
 import httpx
-from imagga_sdk import ImaggaClient # Added Imagga client
+from imagga.imagga import ImaggaClient # Corrected Imagga client import
 
 # Configure logging
 logging.basicConfig(
