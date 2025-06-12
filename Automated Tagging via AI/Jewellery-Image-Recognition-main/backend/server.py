@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from google.cloud import vision
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from groq import Groq
@@ -14,7 +15,6 @@ from PIL import Image
 import io
 import logging
 import httpx
-import requests # Added requests for Imagga API
 
 # Configure logging
 logging.basicConfig(
@@ -110,62 +110,32 @@ def optimize_image(image_data: bytes, max_size: tuple = (800, 600)) -> str:
 async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str, Any]:
     logger.info(f"Analyzing image: {filename}")
     try:
-        # Step 1: Use Imagga API to analyze the image
-        imagga_api_key = os.getenv("IMAGGA_API_KEY")
-        imagga_api_secret = os.getenv("IMAGGA_API_SECRET")
+        # Step 1: Use Google Cloud Vision to analyze the image
+        vision_client = vision.ImageAnnotatorClient()
+        image_content = base64.b64decode(image_base64)
+        image = vision.Image(content=image_content)
 
-        if not imagga_api_key or not imagga_api_secret:
-            logger.error("Imagga API key or secret not found in environment variables.")
-            # Fallback or raise error - for now, proceed with empty tags
-            imagga_tags = []
-            imagga_error = "Imagga API credentials not configured."
-        else:
-            imagga_tags = []
-            imagga_error = None
-            https_api_url = "https://api.imagga.com/v2/tags"
-            try:
-                # image_base64 is already a string, no need to decode image_content
-                response = requests.post(
-                    https_api_url,
-                    auth=(imagga_api_key, imagga_api_secret),
-                    data={'image_base64': image_base64} # Send as form data
-                )
-                response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
-                imagga_response = response.json()
+        # Perform label detection and object detection
+        label_response = vision_client.label_detection(image=image)
+        object_response = vision_client.object_localization(image=image)
 
-                if imagga_response.get('status', {}).get('type') == 'success':
-                    imagga_tags = [tag['tag']['en'] for tag in imagga_response.get('result', {}).get('tags', []) if tag.get('confidence', 0) > 20]
-                else:
-                    imagga_error = f"Imagga API error: {imagga_response.get('status', {}).get('text', 'Unknown error')}"
-                    logger.error(imagga_error)
-            except requests.exceptions.RequestException as req_e:
-                imagga_error = f"Error calling Imagga API (requests): {str(req_e)}"
-                logger.error(imagga_error)
-            except Exception as img_e: # Catch other potential errors like JSON parsing
-                imagga_error = f"Error processing Imagga response: {str(img_e)}"
-                logger.error(imagga_error)
-
-        logger.info(f"Imagga API tags: {imagga_tags}")
-        if imagga_error:
-            logger.error(f"Imagga processing failed: {imagga_error}")
+        # Extract labels and objects
+        labels = [
+            label.description.lower() for label in label_response.label_annotations
+        ]
+        objects = [
+            obj.name.lower() for obj in object_response.localized_object_annotations
+        ]
+        logger.info(f"Vision API labels: {labels}")
+        logger.info(f"Vision API objects: {objects}")
 
         # Step 2: Create a description for Groq
-        if imagga_tags:
-            description = f"""
-            Jewelry image analysis:
-            - Detected tags from Imagga: {', '.join(imagga_tags)}
-            """
-        elif imagga_error:
-            description = f"""
-            Jewelry image analysis:
-            - Tag extraction from Imagga failed: {imagga_error}. Please analyze based on visual features.
-            """
-        else:
-            description = f"""
-            Jewelry image analysis:
-            - No tags detected by Imagga. Please analyze based on visual features.
-            """
-        logger.info(f"Description for Groq (using Imagga): {description}")
+        description = f"""
+        Jewelry image analysis:
+        - Detected labels: {', '.join(labels) if labels else 'none'}
+        - Detected objects: {', '.join(objects) if objects else 'none'}
+        """
+        logger.info(f"Vision API description: {description}")
 
         # Step 3: Use Groq to generate structured tags
         analysis_prompt = f"""
