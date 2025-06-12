@@ -1,5 +1,4 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from google.cloud import vision
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from groq import Groq
@@ -15,6 +14,7 @@ from PIL import Image
 import io
 import logging
 import httpx
+import requests # Ensure requests is imported
 
 # Configure logging
 logging.basicConfig(
@@ -110,32 +110,61 @@ def optimize_image(image_data: bytes, max_size: tuple = (800, 600)) -> str:
 async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str, Any]:
     logger.info(f"Analyzing image: {filename}")
     try:
-        # Step 1: Use Google Cloud Vision to analyze the image
-        vision_client = vision.ImageAnnotatorClient()
-        image_content = base64.b64decode(image_base64)
-        image = vision.Image(content=image_content)
+        # Step 1: Use DeepAI API to analyze the image
+        deepai_api_key = os.getenv("DEEPAI_API_KEY")
+        deepai_tags = []
+        deepai_error = None
 
-        # Perform label detection and object detection
-        label_response = vision_client.label_detection(image=image)
-        object_response = vision_client.object_localization(image=image)
+        if not deepai_api_key:
+            logger.error("DeepAI API key not found in environment variables.")
+            deepai_error = "DeepAI API key not configured."
+            deepai_tags = []
+        else:
+            image_bytes = base64.b64decode(image_base64)
+            try:
+                r = requests.post(
+                    "https://api.deepai.org/api/image-tagging",
+                    files={'image': image_bytes},
+                    headers={'api-key': deepai_api_key}
+                )
+                r.raise_for_status()
+                deepai_response = r.json()
+                # The DeepAI image-tagging endpoint returns tags in response['output']['tags']
+                deepai_tags = deepai_response.get('output', {}).get('tags', [])
+                deepai_error = None
+            except requests.exceptions.RequestException as req_e:
+                deepai_error = f"Error calling DeepAI API: {str(req_e)}"
+                deepai_tags = []
+                if hasattr(req_e, 'response') and req_e.response is not None:
+                    try:
+                        deepai_error += f" - Details: {req_e.response.json()}"
+                    except ValueError: # If response is not JSON
+                        deepai_error += f" - Details: {req_e.response.text}"
+            except Exception as e: # Catch other errors like JSON parsing
+                deepai_error = f"Error processing DeepAI response: {str(e)}"
+                deepai_tags = []
 
-        # Extract labels and objects
-        labels = [
-            label.description.lower() for label in label_response.label_annotations
-        ]
-        objects = [
-            obj.name.lower() for obj in object_response.localized_object_annotations
-        ]
-        logger.info(f"Vision API labels: {labels}")
-        logger.info(f"Vision API objects: {objects}")
+        logger.info(f"DeepAI API tags: {deepai_tags}")
+        if deepai_error:
+            logger.error(f"DeepAI processing failed: {deepai_error}")
 
         # Step 2: Create a description for Groq
-        description = f"""
-        Jewelry image analysis:
-        - Detected labels: {', '.join(labels) if labels else 'none'}
-        - Detected objects: {', '.join(objects) if objects else 'none'}
-        """
-        logger.info(f"Vision API description: {description}")
+        if deepai_tags:
+            description = f"""
+            Jewelry image analysis:
+            - Detected tags from DeepAI: {', '.join(deepai_tags)}
+            """
+        elif deepai_error:
+            description = f"""
+            Jewelry image analysis:
+            - Tag extraction from DeepAI failed: {deepai_error}. Please analyze based on visual features.
+            """
+        else:
+            description = f"""
+            Jewelry image analysis:
+            - No tags detected by DeepAI. Please analyze based on visual features.
+            """
+        logger.info(f"Description for Groq (using DeepAI): {description}")
 
         # Step 3: Use Groq to generate structured tags
         analysis_prompt = f"""
