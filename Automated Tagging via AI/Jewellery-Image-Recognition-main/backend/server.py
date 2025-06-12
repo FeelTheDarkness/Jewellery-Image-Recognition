@@ -14,7 +14,7 @@ from PIL import Image
 import io
 import logging
 import httpx
-from imagga.imagga import ImaggaClient # Corrected Imagga client import
+import requests # Added requests for Imagga API
 
 # Configure logging
 logging.basicConfig(
@@ -120,135 +120,29 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
             imagga_tags = []
             imagga_error = "Imagga API credentials not configured."
         else:
-            imagga_client = ImaggaClient(api_key=imagga_api_key, api_secret=imagga_api_secret)
-            image_content = base64.b64decode(image_base64)
-
             imagga_tags = []
             imagga_error = None
+            https_api_url = "https://api.imagga.com/v2/tags"
             try:
-                # Imagga SDK might require a file path or URL.
-                # If it accepts bytes directly, this is good.
-                # For now, let's assume it needs a file-like object or path.
-                # We'll write the bytes to a temporary in-memory buffer.
-                # Some SDKs might directly accept `image_content` (bytes)
-                # or require `files={'image': image_content}`.
-                # This part needs to be verified against imagga_sdk documentation.
-                # Assuming `tag_image` takes image content as bytes for now.
-                # If not, this needs to be: `imagga_response = imagga_client.upload_image(image_content=image_content)`
-                # then `imagga_client.tags(image_upload_id=response['result']['upload_id'])`
-                # Or save to a temp file and pass path.
-                # For simplicity, assuming a direct method for now.
-                # This is a placeholder for the actual Imagga call
-
-                # Let's try with uploading the image first, then tagging.
-                # This is a common pattern for Imagga.
-                # The SDK might have a more direct way, e.g., `tag_image(image_content=...)`
-                # Checking typical Imagga workflow: upload image, then tag using the returned ID.
-
-                # Option 1: Upload image then get tags (more robust for larger files)
-                # Create a file-like object for the SDK if it expects one
-                image_file_like = io.BytesIO(image_content)
-                image_file_like.name = filename # Some SDKs might need a name
-
-                # The actual method name for uploading and then tagging might differ.
-                # This is a common pattern:
-                # upload_response = imagga_client.upload_image(image_file_like) # This is hypothetical
-                # if upload_response.get('status', {}).get('type') == 'success':
-                #     image_id = upload_response.get('result', {}).get('upload_id')
-                #     if image_id:
-                #         imagga_response = imagga_client.tags(image_upload_id=image_id)
-                #     else:
-                #         raise Exception("Failed to get image ID from Imagga upload response.")
-                # else:
-                #     raise Exception(f"Imagga image upload failed: {upload_response.get('status', {}).get('text')}")
-
-                # Option 2: Direct tagging if available (simpler if SDK supports it)
-                # This assumes the SDK has a method like `tag_image` that takes bytes
-                # or a file object directly for tagging.
-                # The official Python SDK for Imagga v2 is `imagga_python_sdk`.
-                # Its method is `tags(image=<filepath_or_url>)` or `tags(image_upload_id=<id>)`.
-                # To use with content, we might need to upload first or use a temp file.
-                # For now, we will assume `tag_image` is a hypothetical direct method or that
-                # the client handles content upload implicitly.
-                # This part is critical and depends on the actual imagga_sdk.
-                # Given the constraints, I'll use a structure that anticipates needing to upload.
-
-                # Simplification: Assume `tag_image` can handle raw bytes or a file stream.
-                # This is often not the case; usually, it's `imagga_client.tags(image_path_or_url='path/to/image.jpg')`
-                # or `imagga_client.tags(image_upload_id='some_id')`.
-                # If `imagga_sdk` is a wrapper that handles this, `tag_image(image_content)` might work.
-                # Let's proceed with a placeholder for the call, assuming `tags` method with content.
-                # The Imagga SDK `imagga_python_sdk` has `tags(image='path_or_url')`.
-                # To handle in-memory content without saving to disk and passing a path,
-                # many SDKs allow passing a file-like object.
-                # If not, we'd have to save image_content to a temp file.
-
-                # Let's try to use the `tags` method by providing the image content.
-                # The SDK might require `files={'image': image_file_like}` for uploads.
-                # The ImaggaClient might have a method like `post` or `request` for this.
-                # Without the exact SDK structure, this is an educated guess.
-                # A common pattern for Imagga's own client or direct HTTP requests:
-                # response = requests.post(
-                #     'https://api.imagga.com/v2/tags',
-                #     auth=(imagga_api_key, imagga_api_secret),
-                #     files={'image': image_content}
-                # )
-                # imagga_response = response.json()
-
-                # Assuming imagga_client.tags can take a file-like object or bytes.
-                # This is a common pattern for SDKs that wrap REST APIs.
-                # If the SDK is strictly path/URL based, this needs adjustment (temp file).
-
-                # For the purpose of this exercise, let's assume `imagga_client.tags`
-                # can accept `files={'image': image_file_like}` or a similar mechanism.
-                # The `imagga_sdk` mentioned in the prompt might be hypothetical.
-                # The real one is `imagga_python_sdk`.
-                # `imagga_python_sdk.ImaggaV2Api(api_key, api_secret).tag_image_from_file(image_file_like)` is plausible.
-                # Or `...tag_image_from_url`
-                # Let's assume a generic `tag_image` method on our `ImaggaClient` for now.
-
-                # To make this work with a typical Imagga SDK structure,
-                # which often involves uploading first or providing a path/URL:
-                # 1. Save content to a temporary file.
-                # 2. Pass the path to `imagga_client.tags(image_path=temp_file_path)`.
-                # This is safer if `tag_image(image_content=...)` isn't directly supported.
-                # However, the prompt implies direct use.
-
-                # Let's assume `imagga_client.tag_image()` is a method that can take bytes.
-                # This is a simplification.
-                # A more robust approach might involve `upload_image` then `tag_image_by_id`.
-
-                # Simulating the call, as the exact SDK method is unknown:
-                # imagga_response = imagga_client.tag_image(image_content=image_content) # Hypothetical
-
-                # Based on common Imagga SDKs (like official Python SDK `imagga_python_sdk`):
-                # It would be more like:
-                # `response = imagga_client.post('tags', files={'image': image_file_like})`
-                # or `imagga_client.tags(image_path_or_url=...`
-                # For now, let's try a structure that mirrors the Google Vision call's simplicity,
-                # assuming `tag_image` handles the upload or content directly.
-
-                # If `imagga_sdk.ImaggaClient` is a custom wrapper, it might have this method.
-                # If it's the official `imagga-python-sdk`, the methods are different.
-                # Let's assume `tag_image` is a method that accepts content bytes.
-                # This is the most direct interpretation of the prompt's example.
-
-                temp_file_path = f"/tmp/{filename}" # Requires write access to /tmp
-                with open(temp_file_path, "wb") as f:
-                    f.write(image_content)
-
-                # Assuming the SDK's `tags` method takes a local file path
-                imagga_response = imagga_client.tags(image=temp_file_path)
-                os.remove(temp_file_path) # Clean up temp file
-
+                # image_base64 is already a string, no need to decode image_content
+                response = requests.post(
+                    https_api_url,
+                    auth=(imagga_api_key, imagga_api_secret),
+                    data={'image_base64': image_base64} # Send as form data
+                )
+                response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+                imagga_response = response.json()
 
                 if imagga_response.get('status', {}).get('type') == 'success':
-                    imagga_tags = [tag['tag']['en'] for tag in imagga_response.get('result', {}).get('tags', []) if tag.get('confidence', 0) > 20] # Added confidence filter
+                    imagga_tags = [tag['tag']['en'] for tag in imagga_response.get('result', {}).get('tags', []) if tag.get('confidence', 0) > 20]
                 else:
                     imagga_error = f"Imagga API error: {imagga_response.get('status', {}).get('text', 'Unknown error')}"
                     logger.error(imagga_error)
-            except Exception as img_e:
-                imagga_error = f"Error calling Imagga API: {str(img_e)}"
+            except requests.exceptions.RequestException as req_e:
+                imagga_error = f"Error calling Imagga API (requests): {str(req_e)}"
+                logger.error(imagga_error)
+            except Exception as img_e: # Catch other potential errors like JSON parsing
+                imagga_error = f"Error processing Imagga response: {str(img_e)}"
                 logger.error(imagga_error)
 
         logger.info(f"Imagga API tags: {imagga_tags}")
