@@ -14,7 +14,7 @@ from PIL import Image
 import io
 import logging
 import httpx
-import requests # Added requests for Imagga API
+import requests # Ensure requests is imported
 
 # Configure logging
 logging.basicConfig(
@@ -113,47 +113,47 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
         # Step 1: Use Imagga API to analyze the image
         imagga_api_key = os.getenv("IMAGGA_API_KEY")
         imagga_api_secret = os.getenv("IMAGGA_API_SECRET")
+        imagga_tags_list = []
+        imagga_error = None
 
         if not imagga_api_key or not imagga_api_secret:
             logger.error("Imagga API key or secret not found in environment variables.")
-            # Fallback or raise error - for now, proceed with empty tags
-            imagga_tags = []
             imagga_error = "Imagga API credentials not configured."
         else:
-            imagga_tags = []
-            imagga_error = None
             https_api_url = "https://api.imagga.com/v2/tags"
             try:
-                # image_base64 is already a string, no need to decode image_content
                 response = requests.post(
                     https_api_url,
                     auth=(imagga_api_key, imagga_api_secret),
-                    data={'image_base64': image_base64} # Send as form data
+                    data={'image_base64': image_base64}
                 )
-                response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
-                imagga_response = response.json()
+                response.raise_for_status()
+                imagga_response_json = response.json()
 
-                if imagga_response.get('status', {}).get('type') == 'success':
-                    imagga_tags = [tag['tag']['en'] for tag in imagga_response.get('result', {}).get('tags', []) if tag.get('confidence', 0) > 20]
+                if imagga_response_json.get('status', {}).get('type') == 'success':
+                    tags_data = imagga_response_json.get('result', {}).get('tags', [])
+                    imagga_tags_list = [tag_entry['tag']['en'] for tag_entry in tags_data if tag_entry.get('confidence', 0) > 15]
                 else:
-                    imagga_error = f"Imagga API error: {imagga_response.get('status', {}).get('text', 'Unknown error')}"
-                    logger.error(imagga_error)
+                    imagga_error = f"Imagga API error: {imagga_response_json.get('status', {}).get('text', 'Unknown error')}"
             except requests.exceptions.RequestException as req_e:
-                imagga_error = f"Error calling Imagga API (requests): {str(req_e)}"
-                logger.error(imagga_error)
-            except Exception as img_e: # Catch other potential errors like JSON parsing
-                imagga_error = f"Error processing Imagga response: {str(img_e)}"
-                logger.error(imagga_error)
+                imagga_error = f"Error calling Imagga API: {str(req_e)}"
+                if hasattr(req_e, 'response') and req_e.response is not None:
+                    try:
+                        imagga_error += f" - Details: {req_e.response.json()}"
+                    except ValueError:
+                        imagga_error += f" - Details: {req_e.response.text}"
+            except Exception as e: # Catch other errors like JSON parsing
+                imagga_error = f"Error processing Imagga response: {str(e)}"
 
-        logger.info(f"Imagga API tags: {imagga_tags}")
+        logger.info(f"Imagga API tags: {imagga_tags_list}")
         if imagga_error:
             logger.error(f"Imagga processing failed: {imagga_error}")
 
         # Step 2: Create a description for Groq
-        if imagga_tags:
+        if imagga_tags_list:
             description = f"""
             Jewelry image analysis:
-            - Detected tags from Imagga: {', '.join(imagga_tags)}
+            - Detected tags from Imagga: {', '.join(imagga_tags_list)}
             """
         elif imagga_error:
             description = f"""
@@ -169,44 +169,53 @@ async def analyze_image_with_groq(image_base64: str, filename: str) -> Dict[str,
 
         # Step 3: Use Groq to generate structured tags
         analysis_prompt = f"""
-        Based on the following jewelry image analysis, extract comprehensive visual features for hashtag generation:
+    You are a jewelry analysis expert. Based on the following image analysis data, extract comprehensive visual features.
+    The image analysis data is:
+    {description}
 
-        {description}
+    Your primary goal is to identify and categorize specific visual attributes of the jewelry item(s) shown.
+    If the initial tags are very generic (e.g., 'decoration', 'design', 'element'), try to infer more specific jewelry-related attributes. For example, if 'vintage' and 'decoration' are present, consider if it might be 'antique jewelry' or part of an 'ornate design style'.
 
-        Please identify and categorize:
-        1. MATERIALS & TEXTURES:
-        - Metals (gold, silver, platinum, copper, brass, etc.)
-        - Gemstones (diamond, ruby, emerald, etc.)
-        - Other materials (pearl, bead, etc.)
-        - Surfaces (matte, glossy, textured, smooth, etc.)
-        2. COLORS:
-        - Dominant colors in the jewelry (e.g., gold, silver, red, blue)
-        3. PATTERNS:
-        - Any visible patterns (e.g., filigree, engraved, plain)
-        4. MOTIFS:
-        - Design elements (e.g., floral, geometric, abstract)
-        5. STYLES:
-        - Style categories (e.g., vintage, modern, minimalist, ornate)
-        6. FUNCTIONAL:
-        - Jewelry type (e.g., ring, necklace, bracelet, earrings)
+    Please identify and categorize the following, ensuring all keys are present in your response:
+    1. MATERIALS & TEXTURES:
+       - Specific metals (e.g., gold, yellow gold, white gold, silver, platinum, copper, brass).
+       - Specific gemstones (e.g., diamond, ruby, emerald, sapphire, pearl, amethyst, opal). Include characteristics like 'cabochon' or 'faceted' if discernible.
+       - Other materials (e.g., enamel, bead, resin, wood, leather).
+       - Surface textures (e.g., matte, glossy, hammered, brushed, polished, engraved, filigree).
+       If none are clearly identifiable, provide an empty list for "materials", e.g., {{ "materials": [] }}.
+    2. COLORS:
+       - Dominant and notable colors visible in the jewelry itself (e.g., gold, silver, red, blue, green, multicolored).
+       If none are clearly identifiable, provide an empty list for "colors", e.g., {{ "colors": [] }}.
+    3. PATTERNS:
+       - Visible patterns on the jewelry (e.g., filigree, engraved, geometric, floral, abstract, plain, striped, polka dot).
+       If none are clearly identifiable, provide an empty list for "patterns", e.g., {{ "patterns": [] }}.
+    4. MOTIFS:
+       - Recognizable design elements or symbols (e.g., floral, heart, animal, celestial, geometric, abstract, religious symbol, initial).
+       If none are clearly identifiable, provide an empty list for "motifs", e.g., {{ "motifs": [] }}.
+    5. STYLES:
+       - Overall style categories (e.g., vintage, antique, modern, minimalist, art deco, art nouveau, bohemian, ethnic, statement, bridal, everyday).
+       If none are clearly identifiable, provide an empty list for "styles", e.g., {{ "styles": [] }}.
+    6. FUNCTIONAL (Jewelry Type):
+       - The type of jewelry (e.g., ring, engagement ring, wedding band, necklace, pendant, choker, earrings, stud earrings, hoop earrings, dangle earrings, bracelet, cuff bracelet, bangle, brooch, pin, tiara, body jewelry). Be as specific as possible.
+       If none are clearly identifiable, provide an empty list for "functional", e.g., {{ "functional": [] }}.
 
-        Provide the response in JSON format with the following structure. Ensure the JSON is valid and complete:
-        {{
-            "materials": [],
-            "colors": [],
-            "patterns": [],
-            "motifs": [],
-            "styles": [],
-            "functional": []
-        }}
-        """
+    Provide the response **strictly** in the following JSON format. Ensure the JSON is valid and all keys are present, using empty lists `[]` if a category has no items. Do not add any text before or after the JSON object:
+    {{
+        "materials": [],
+        "colors": [],
+        "patterns": [],
+        "motifs": [],
+        "styles": [],
+        "functional": []
+    }}
+    """
 
         logger.info("Making Groq API call")
         response = groq_client.chat.completions.create(
             model="llama3-70b-8192",
             messages=[{"role": "user", "content": analysis_prompt}],
             max_tokens=500,
-            temperature=0.7,
+            temperature=0.5,
             response_format={"type": "json_object"},
         )
 
@@ -294,8 +303,11 @@ async def upload_images(files: List[UploadFile] = File(...)):
         analyses = []
         for file in files:
             logger.info(f"Processing file: {file.filename}")
+            if file.content_type is None:
+                logger.warning(f"Skipping file {file.filename} due to missing content_type.")
+                continue
             if not file.content_type.startswith("image/"):
-                logger.warning(f"Skipping non-image file: {file.filename}")
+                logger.warning(f"Skipping non-image file: {file.filename} (content_type: {file.content_type})")
                 continue
 
             try:
@@ -413,18 +425,31 @@ async def get_taxonomy(session_id: str):
 async def get_sessions():
     try:
         sessions = []
-        async for taxonomy in taxonomies_collection.find().sort("created_at", -1):
-            taxonomy.pop("_id", None)
+        async for taxonomy_doc in taxonomies_collection.find().sort("created_at", -1):
+            # Provide safe defaults for all expected top-level keys
+            session_id = taxonomy_doc.get("session_id", "N/A")
+            image_count = taxonomy_doc.get("image_count", 0)
+            created_at_dt = taxonomy_doc.get("created_at") # Keep as datetime or None for now
+
+            # Safely access nested hashtag_count
+            taxonomy_data = taxonomy_doc.get("taxonomy") # This could be None
+            if not isinstance(taxonomy_data, dict): # Ensure it's a dictionary
+                taxonomy_data = {}
+
+            hashtag_count_data = taxonomy_data.get("hashtag_count", {}) # Default to empty dict
+            if not isinstance(hashtag_count_data, dict): # Ensure this is also a dict if present
+                 hashtag_count_data = {}
+
+            # Construct the session entry safely
             sessions.append(
                 {
-                    "session_id": taxonomy["session_id"],
-                    "image_count": taxonomy["image_count"],
-                    "created_at": taxonomy["created_at"],
-                    "hashtag_count": taxonomy.get("taxonomy", {}).get(
-                        "hashtag_count", {}
-                    ),
+                    "session_id": session_id,
+                    "image_count": image_count,
+                    "created_at": created_at_dt, # Let FastAPI handle datetime serialization
+                    "hashtag_count": hashtag_count_data, # Send the dict (or empty dict)
                 }
             )
+            # No need to taxonomy_doc.pop("_id", None) as we are selecting fields.
 
         return {"sessions": sessions}
 
